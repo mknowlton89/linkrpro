@@ -10,5 +10,4 @@ export default async (req, res) => {
         .findOne({ email: 'mknowlton89+oauth3@gmail.com' })
 
     res.json(userByEmail)
-    // console.log(links)
 };

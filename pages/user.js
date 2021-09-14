@@ -10,16 +10,16 @@ const user = () => {
     console.log(user);
     // console.log(userByEmail);
 
-    useEffect(() => {
-        axios.get('/api/user')
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-        return {}
-    }, [])
+    // useEffect(() => {
+    //     axios.get('/api/user')
+    //         .then(function (response) {
+    //             console.log(response.data);
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         })
+    //     return {}
+    // }, [])
 
     return (
         user && (
@@ -27,6 +27,7 @@ const user = () => {
                 <img src={user.picture} alt={user.name} />
                 <h2>{user.name}</h2>
                 <p>{user.email}</p>
+                <p>{user.sub}</p>
             </div>
         )
     )
