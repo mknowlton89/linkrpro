@@ -1,4 +1,50 @@
-## Example app using MongoDB - TEST
+## How to Use
+
+- Run Git Clone of this repo locally and rename it using the following command.
+
+`git clone <repo_ssh> <name_of_the_new_repo>`
+
+- CD into the new repo
+
+- Run npm i to install all of the dependencies
+
+- Create a new MongoDB Database & Collection via MongoDB Atlas
+
+    - Give the Collection the name "users".
+
+- Open the repo and update the .env.local
+
+    - Update the MONGODB_URI string with the new DB Name
+
+    - Update MONGODB_DB with the new DB Name
+
+- Create a new Auth0 application & Update the .env.local file
+
+    - Update the AUTH0_ISSUER_BASE_URL, AUTH0_CLIENT_ID, & AUTH0_CLIENT_SECRET that you get from Auth0
+
+    - Within Auth0, go to Authentication > Database and click "+ Create DB Connection".
+
+    - Once created, go into that new DB Connection and go to the "Custom Database" tab.
+
+    - Turn on "Use my own database"
+
+    - Then, customize the Database Action Scripts for all of the various requests. (Hint: You can select a MongoDB Template from the drop-down on the right-hand side of the embedded code-editor.)
+
+    - You'll want to change the const client to something like the following
+
+    `const client = new MongoClient('mongodb+srv://mknowlton-admin:'+configuration.MONGO_PASSWORD+'@cluster0.hfcgv.mongodb.net/utmGenerator?retryWrites=true&w=majority');`
+
+    Then, you'll want to change the DB name on line 9, and the collection name on line 10.
+
+- Run 'npm run dev' and see if you're seeing "You are connected to MongoDB" on localhost:3000
+
+- Click the "Login" button and create a new account. After creating that account, the button should now say "Logout".
+
+- Go to the DB you created and double check the new user is there.
+
+- You can also go to localhost:3000/user and look in the console to see the Auth0 user object, and a custom API call via MongoDB & Axios.
+
+## Additional Documentation
 
 [MongoDB](https://www.mongodb.com/) is a general purpose, document-based, distributed database built for modern application developers and for the cloud era. This example will show you how to connect to and use MongoDB as your backend for your Next.js app.
 
