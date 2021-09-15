@@ -11,9 +11,12 @@ export default {
             }
         })
     },
-    createNewLink: function (newLink) {
-        console.log(newLink)
-        return axios.post('/api/links/new', newLink)
+    createNewLink: function (newLink, user) {
+        console.log(newLink, user)
+        return axios.post('/api/links/new', {
+            link: newLink,
+            user: user,
+        })
     },
     //   authorizeUser: function (authToken) {
     //     return axios.post("/api/users/auth/", {

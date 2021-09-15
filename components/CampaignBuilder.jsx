@@ -31,9 +31,9 @@ const CampaignBuilder = () => {
 
     }
 
-    const saveLink = () => {
-        console.log(generatedLink)
-        API.createNewLink(generatedLink)
+    const saveLink = (link) => {
+        console.log('Generated Link' + link)
+        API.createNewLink(link, user.sub)
     };
 
     const generateLink = () => {
@@ -46,8 +46,6 @@ const CampaignBuilder = () => {
         if (isLinkCopied) {
             setIsLinkCopied(false);
         }
-
-        saveLink()
     }
 
     const copyToClipboard = () => {
@@ -57,10 +55,19 @@ const CampaignBuilder = () => {
     }
 
     useEffect(() => {
+        if (generatedLink) {
+            let link = generatedLink
+            saveLink(link);
+        }
+    }, [generatedLink])
+
+    useEffect(() => {
         if (linkInputs.campaignUrl && linkInputs.campaignMedium && linkInputs.campaignSource && linkInputs.campaignName) {
             setIsButtonDisabled(false);
         }
     }, [linkInputs])
+
+    console.log(generatedLink)
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>{error.message}</div>;
@@ -82,7 +89,7 @@ const CampaignBuilder = () => {
                         fieldType="url"
                         linkInputs={linkInputs}
                         setLinkInputs={setLinkInputs}
-                        />
+                    />
                     <HelperText>The full website URL where you want traffic to go. (e.g. https://www.example.com)</HelperText>
                 </div>
 
@@ -170,7 +177,7 @@ const CampaignBuilder = () => {
                     <p
                         onClick={copyToClipboard}
                         className="copy-btn">
-                            {!isLinkCopied ? 'COPY TO CLIPBOARD' : 'COPIED!'}
+                        {!isLinkCopied ? 'COPY TO CLIPBOARD' : 'COPIED!'}
                     </p>
                 </div>
             </PageContentWrapper>
