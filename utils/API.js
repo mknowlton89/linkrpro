@@ -18,6 +18,12 @@ export default {
             user: user,
         })
     },
+    createUtmSource: function (campaignSource, user) {
+        return axios.post('/api/utm-parameters/newSource', {
+            campaignSource: campaignSource,
+            user: user,
+        })
+    },
     //   authorizeUser: function (authToken) {
     //     return axios.post("/api/users/auth/", {
     //       params: {

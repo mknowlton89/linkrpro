@@ -32,8 +32,8 @@ const CampaignBuilder = () => {
     }
 
     const saveLink = (link) => {
-        console.log('Generated Link' + link)
         API.createNewLink(link, user.sub)
+        API.createUtmSource(linkInputs.campaignSource, user.sub)
     };
 
     const generateLink = () => {
