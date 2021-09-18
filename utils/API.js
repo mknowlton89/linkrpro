@@ -8,9 +8,14 @@ export default {
             user: user,
         })
     },
-    createUtmParameter: function (utmParameter, user) {
+    createUtmParameter: function (parameter, utmParameter, user) {
+        console.log(parameter)
         console.log(utmParameter)
         console.log(user)
+        return axios.post(`/api/utm-parameters/${parameter}`, {
+            parameter: utmParameter,
+            user: user,
+        })
     },
     createUtmSource: function (campaignSource, user) {
         return axios.post('/api/utm-parameters/new-source', {

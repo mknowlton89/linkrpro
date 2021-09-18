@@ -86,15 +86,13 @@ const CampaignBuilder = () => {
             if (options[parameter].includes(linkInputs[parameter])) {
                 console.log('Already in options array')
             } else {
-                API.createUtmParameter(linkInputs[parameter], user.sub)
+                API.createUtmParameter(parameter, linkInputs[parameter], user.sub)
             };
         }
     }
 
     const saveLink = (link) => {
         API.createNewLink(link, user.sub)
-        // API.createUtmSource(linkInputs.campaignSource, user.sub)
-        // API.createUtmUrl(linkInputs.campaignUrl, user.sub)
         saveUtmParameters()
     };
 
