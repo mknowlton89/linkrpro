@@ -10,55 +10,54 @@ import { StyledInput, StyledListItem, FlexColumnDiv } from '../styles/StyledComp
 //     error?: boolean,
 // }
 
-const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, error }) => {
+const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, error, options }) => {
     const [filteredList, setFilteredList] = useState([]);
     const [dropDownActive, setDropDownActive] = useState(false);
     const [isValid, setIsValid] = useState(true);
 
-    // TODO: Figure out how to define options as an object that contains arrays of strings
-    let options = {
-        campaignUrl: [
-            'https://www.google.com',
-            'https://www.facebook.com',
-            'https://www.twitter.com'
-        ],
-        campaignMedium: [
-            'facebook',
-            'fb',
-            'facebook ads',
-            'google',
-            'youTube',
-            'pinterest'
-        ],
-        campaignSource: [
-            'facebook',
-            'fb',
-            'facebook ads',
-            'google',
-            'youtube',
-            'pinterest'
-        ],
-        campaignName: [
-            'campaign1',
-            'campaign2',
-            'campaign3'
-        ],
-        campaignId: [
-            'campaign1',
-            'campaign2',
-            'campaign3'
-        ],
-        campaignTerm: [
-            'campaign1',
-            'campaign2',
-            'campaign3'
-        ],
-        campaignContext: [
-            'campaign1',
-            'campaign2',
-            'campaign3'
-        ],
-    }
+    // let options = {
+    //     campaignUrl: [
+    //         'https://www.google.com',
+    //         'https://www.facebook.com',
+    //         'https://www.twitter.com'
+    //     ],
+    //     campaignMedium: [
+    //         'facebook',
+    //         'fb',
+    //         'facebook ads',
+    //         'google',
+    //         'youTube',
+    //         'pinterest'
+    //     ],
+    //     campaignSource: [
+    //         'facebook',
+    //         'fb',
+    //         'facebook ads',
+    //         'google',
+    //         'youtube',
+    //         'pinterest'
+    //     ],
+    //     campaignName: [
+    //         'campaign1',
+    //         'campaign2',
+    //         'campaign3'
+    //     ],
+    //     campaignId: [
+    //         'campaign1',
+    //         'campaign2',
+    //         'campaign3'
+    //     ],
+    //     campaignTerm: [
+    //         'campaign1',
+    //         'campaign2',
+    //         'campaign3'
+    //     ],
+    //     campaignContext: [
+    //         'campaign1',
+    //         'campaign2',
+    //         'campaign3'
+    //     ],
+    // }
 
     const handleInputFilter = (input) => {
         setFilteredList(options[fieldName].filter((option) => option.includes(input)))

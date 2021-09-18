@@ -7,7 +7,7 @@ export default async (req, res) => {
 
     // console.log(req.body.link)
     var bodyJson = JSON.stringify(req.body.link)
-    console.log(bodyJson)
+    // console.log(bodyJson)
 
     const newLink = await db
         .collection("links")

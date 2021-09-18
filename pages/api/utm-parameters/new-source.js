@@ -5,7 +5,7 @@ export default async (req, res) => {
     const client = await clientPromise
     const db = client.db();
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const newSource = await db
         .collection("utm-source")

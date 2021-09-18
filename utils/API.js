@@ -1,6 +1,29 @@
 import axios from "axios";
 
 export default {
+    createNewLink: function (newLink, user) {
+        console.log(newLink, user)
+        return axios.post('/api/links/new', {
+            link: newLink,
+            user: user,
+        })
+    },
+    createUtmParameter: function (utmParameter, user) {
+        console.log(utmParameter)
+        console.log(user)
+    },
+    createUtmSource: function (campaignSource, user) {
+        return axios.post('/api/utm-parameters/new-source', {
+            campaignSource: campaignSource,
+            user: user,
+        })
+    },
+    createUtmUrl: function (campaignUrl, user) {
+        return axios.post('/api/utm-parameters/new-url', {
+            campaignUrl: campaignUrl,
+            user: user,
+        })
+    },
     getLinkHistoryById: function (mongoId) {
 
         let userId = mongoId.split('|')
@@ -9,19 +32,6 @@ export default {
             params: {
                 id: userId[1]
             }
-        })
-    },
-    createNewLink: function (newLink, user) {
-        console.log(newLink, user)
-        return axios.post('/api/links/new', {
-            link: newLink,
-            user: user,
-        })
-    },
-    createUtmSource: function (campaignSource, user) {
-        return axios.post('/api/utm-parameters/newSource', {
-            campaignSource: campaignSource,
-            user: user,
         })
     },
     //   authorizeUser: function (authToken) {

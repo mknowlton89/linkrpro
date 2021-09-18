@@ -22,6 +22,50 @@ const CampaignBuilder = () => {
         campaignContext: '',
     })
 
+    let options = {
+        campaignUrl: [
+            'https://www.google.com',
+            'https://www.facebook.com',
+            'https://www.twitter.com'
+        ],
+        campaignMedium: [
+            'facebook',
+            'fb',
+            'facebook ads',
+            'google',
+            'youTube',
+            'pinterest'
+        ],
+        campaignSource: [
+            'facebook',
+            'fb',
+            'facebook ads',
+            'google',
+            'youtube',
+            'pinterest'
+        ],
+        campaignName: [
+            'campaign1',
+            'campaign2',
+            'campaign3'
+        ],
+        campaignId: [
+            'campaign1',
+            'campaign2',
+            'campaign3'
+        ],
+        campaignTerm: [
+            'campaign1',
+            'campaign2',
+            'campaign3'
+        ],
+        campaignContext: [
+            'campaign1',
+            'campaign2',
+            'campaign3'
+        ],
+    }
+
     const handleOptionalFields = () => {
         if (optionalFields === true) {
             setOptionalFields(false);
@@ -31,9 +75,27 @@ const CampaignBuilder = () => {
 
     }
 
+    const saveUtmParameters = () => {
+
+        for (const parameter in linkInputs) {
+
+            if (!linkInputs[parameter]) {
+                return;
+            }
+
+            if (options[parameter].includes(linkInputs[parameter])) {
+                console.log('Already in options array')
+            } else {
+                API.createUtmParameter(linkInputs[parameter], user.sub)
+            };
+        }
+    }
+
     const saveLink = (link) => {
         API.createNewLink(link, user.sub)
-        API.createUtmSource(linkInputs.campaignSource, user.sub)
+        // API.createUtmSource(linkInputs.campaignSource, user.sub)
+        // API.createUtmUrl(linkInputs.campaignUrl, user.sub)
+        saveUtmParameters()
     };
 
     const generateLink = () => {
@@ -89,6 +151,7 @@ const CampaignBuilder = () => {
                         fieldType="url"
                         linkInputs={linkInputs}
                         setLinkInputs={setLinkInputs}
+                        options={options}
                     />
                     <HelperText>The full website URL where you want traffic to go. (e.g. https://www.example.com)</HelperText>
                 </div>
@@ -100,7 +163,9 @@ const CampaignBuilder = () => {
                             fieldName="campaignSource"
                             fieldType="string"
                             linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs} />
+                            setLinkInputs={setLinkInputs}
+                            options={options}
+                        />
                         <HelperText>The referrer (e.g. google, newsletter)</HelperText>
                     </div>
 
@@ -110,7 +175,9 @@ const CampaignBuilder = () => {
                             fieldName="campaignMedium"
                             fieldType="string"
                             linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs} />
+                            setLinkInputs={setLinkInputs}
+                            options={options}
+                        />
                         <HelperText>Marketing medium (e.g. cpc, banner, email)</HelperText>
                     </div>
 
@@ -120,7 +187,9 @@ const CampaignBuilder = () => {
                             fieldName="campaignName"
                             fieldType="string"
                             linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs} />
+                            setLinkInputs={setLinkInputs}
+                            options={options}
+                        />
                         <HelperText>Product, promo code, or slogan (e.g. spring_sale) One of campaign name or campaign id are required.</HelperText>
                     </div>
                 </div>
@@ -137,7 +206,9 @@ const CampaignBuilder = () => {
                             fieldName="campaignId"
                             fieldType="string"
                             linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs} />
+                            setLinkInputs={setLinkInputs}
+                            options={options}
+                        />
                         <HelperText>The ads campaign id.</HelperText>
                     </div>
 
@@ -148,7 +219,9 @@ const CampaignBuilder = () => {
                             fieldName="campaignTerm"
                             fieldType="string"
                             linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs} />
+                            setLinkInputs={setLinkInputs}
+                            options={options}
+                        />
                         <HelperText>Identify the paid keywords</HelperText>
                     </div>
 
@@ -158,7 +231,9 @@ const CampaignBuilder = () => {
                             fieldName="campaignContext"
                             fieldType="string"
                             linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs} />
+                            setLinkInputs={setLinkInputs}
+                            options={options}
+                        />
                         <HelperText>Use to differentiate ads</HelperText>
                     </div>
                 </div>
