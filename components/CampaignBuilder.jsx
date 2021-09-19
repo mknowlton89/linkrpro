@@ -20,7 +20,8 @@ const CampaignBuilder = () => {
         campaignId: '',
         campaignTerm: '',
         campaignContext: '',
-    })
+    });
+    const [utmParameters, setUtmParameters] = useState({})
 
     let options = {
         campaignUrl: [
@@ -72,17 +73,13 @@ const CampaignBuilder = () => {
         } else {
             setOptionalFields(true);
         }
-
     }
 
     const saveUtmParameters = () => {
-
         for (const parameter in linkInputs) {
-
             if (!linkInputs[parameter]) {
                 return;
             }
-
             if (options[parameter].includes(linkInputs[parameter])) {
                 console.log('Already in options array')
             } else {
@@ -100,9 +97,7 @@ const CampaignBuilder = () => {
         setGeneratedLink(`
             ${linkInputs.campaignUrl}?utm_source=${linkInputs.campaignSource}&utm_medium=${linkInputs.campaignMedium}&utm_campaign=${linkInputs.campaignName}${linkInputs.campaignId && `&utm_id=${linkInputs.campaignId}`}${linkInputs.campaignTerm && `&utm_term=${linkInputs.campaignTerm}`}${linkInputs.campaignContext && `&utm_context=${linkInputs.campaignContext}`}
         `);
-
         setGeneratedLinkWrapper(true);
-
         if (isLinkCopied) {
             setIsLinkCopied(false);
         }
@@ -127,7 +122,11 @@ const CampaignBuilder = () => {
         }
     }, [linkInputs])
 
-    console.log(generatedLink)
+    useEffect(() => {
+        if (user) {
+            API.getUtmParameters(user.sub)
+        }
+    }, [user]);
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>{error.message}</div>;

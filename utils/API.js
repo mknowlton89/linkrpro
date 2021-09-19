@@ -39,6 +39,13 @@ export default {
             }
         })
     },
+    getUtmParameters: function (user) {
+        return axios.get('/api/utm-parameters/get-all', {
+            params: {
+                user: user,
+            }
+        })
+    },
     //   authorizeUser: function (authToken) {
     //     return axios.post("/api/users/auth/", {
     //       params: {
