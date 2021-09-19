@@ -125,6 +125,7 @@ const CampaignBuilder = () => {
     useEffect(() => {
         if (user) {
             API.getUtmParameters(user.sub)
+                .then(res => console.log(res))
         }
     }, [user]);
 
