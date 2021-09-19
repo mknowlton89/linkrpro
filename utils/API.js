@@ -9,9 +9,6 @@ export default {
         })
     },
     createUtmParameter: function (parameter, utmParameter, user) {
-        console.log(parameter)
-        console.log(utmParameter)
-        console.log(user)
         return axios.post(`/api/utm-parameters/${parameter}`, {
             parameter: utmParameter,
             user: user,
@@ -30,9 +27,7 @@ export default {
         })
     },
     getLinkHistoryById: function (mongoId) {
-
         let userId = mongoId.split('|')
-
         return axios.get('/api/links/history', {
             params: {
                 id: userId[1]

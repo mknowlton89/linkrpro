@@ -76,6 +76,7 @@ const CampaignBuilder = () => {
     }
 
     const saveUtmParameters = () => {
+        //TODO: Update the API.createUtmParameter method and endpoint to use a switch case rather than multiple endpoints.
         for (const parameter in linkInputs) {
             if (!linkInputs[parameter]) {
                 return;
@@ -124,8 +125,26 @@ const CampaignBuilder = () => {
 
     useEffect(() => {
         if (user) {
-            API.getUtmParameters(user.sub)
-                .then(res => console.log(res))
+
+            let utmParameterOptions = [
+                'campaignUrl',
+                'campaignSource',
+                'campaignMedium',
+                'campaignName',
+                'campaignId',
+                'campaignTerm',
+                'campaignContext',
+            ]
+
+            utmParameterOptions.forEach((parameter) => {
+                //TODO: Make a call to API.getUtmParameters and pass in the parameter
+                //TODO: Update the ^ api call to accept the parameter prop
+                //TODO: Get the response back and setUtmParameters to the response, making sure to spread in the existing data
+                // API.getUtmParameters(user.sub, parameter)
+                console.log(parameter)
+            })
+            // API.getUtmParameters(user.sub)
+            //     .then(res => console.log(res))
         }
     }, [user]);
 
