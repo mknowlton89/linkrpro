@@ -8,7 +8,7 @@ export default async (req, res) => {
     const db = client.db();
 
     const newName = await db
-        .collection("utm-name")
+        .collection("campaignName")
         .insertOne({
             campaignName: req.body.parameter,
             user: req.body.user,

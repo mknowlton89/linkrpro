@@ -59,13 +59,14 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
     //     ],
     // }
 
-    const handleInputFilter = (input) => {
-        setFilteredList(options[fieldName].filter((option) => option.includes(input)))
+    const handleInputFilter = (input, fieldName) => {
+        setFilteredList(options.filter((option) => option[fieldName].includes(input)))
+        // console.log(options[fieldName])
     }
 
     const handleInputChange = (input, fieldName) => {
         setLinkInputs({ ...linkInputs, [fieldName]: input })
-        handleInputFilter(input);
+        handleInputFilter(input, fieldName);
     }
 
     const handleSelection = (value, fieldName) => {
@@ -86,6 +87,8 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
             setDropDownActive(false)
         }
     }, [filteredList])
+
+    // console.log(options)
 
     return (
         <div className="wrapper" onClick={() => closeDropDown()}>

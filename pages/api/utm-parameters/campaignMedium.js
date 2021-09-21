@@ -8,7 +8,7 @@ export default async (req, res) => {
     const db = client.db();
 
     const newMedium = await db
-        .collection("utm-medium")
+        .collection("campaignMedium")
         .insertOne({
             campaignMedium: req.body.parameter,
             user: req.body.user,

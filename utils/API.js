@@ -34,10 +34,11 @@ export default {
             }
         })
     },
-    getUtmParameters: function (user) {
+    getUtmParameters: function (user, parameter) {
         return axios.get('/api/utm-parameters/get-all', {
             params: {
                 user: user,
+                parameter: parameter,
             }
         })
     },

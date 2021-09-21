@@ -8,7 +8,7 @@ export default async (req, res) => {
     const db = client.db();
 
     const newUrl = await db
-        .collection("utm-url")
+        .collection("campaignUrl")
         .insertOne({
             campaignUrl: req.body.parameter,
             user: req.body.user,
