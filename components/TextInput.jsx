@@ -15,53 +15,8 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
     const [dropDownActive, setDropDownActive] = useState(false);
     const [isValid, setIsValid] = useState(true);
 
-    // let options = {
-    //     campaignUrl: [
-    //         'https://www.google.com',
-    //         'https://www.facebook.com',
-    //         'https://www.twitter.com'
-    //     ],
-    //     campaignMedium: [
-    //         'facebook',
-    //         'fb',
-    //         'facebook ads',
-    //         'google',
-    //         'youTube',
-    //         'pinterest'
-    //     ],
-    //     campaignSource: [
-    //         'facebook',
-    //         'fb',
-    //         'facebook ads',
-    //         'google',
-    //         'youtube',
-    //         'pinterest'
-    //     ],
-    //     campaignName: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    //     campaignId: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    //     campaignTerm: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    //     campaignContext: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    // }
-
     const handleInputFilter = (input, fieldName) => {
-        setFilteredList(options.filter((option) => option[fieldName].includes(input)))
-        // console.log(options[fieldName])
+        setFilteredList(options[fieldName].filter((option) => option.includes(input)))
     }
 
     const handleInputChange = (input, fieldName) => {
@@ -87,8 +42,6 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
             setDropDownActive(false)
         }
     }, [filteredList])
-
-    // console.log(options)
 
     return (
         <div className="wrapper" onClick={() => closeDropDown()}>

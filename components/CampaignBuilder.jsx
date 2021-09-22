@@ -23,49 +23,6 @@ const CampaignBuilder = () => {
     });
     const [utmParameters, setUtmParameters] = useState({})
 
-    // let options = {
-    //     campaignUrl: [
-    //         'https://www.google.com',
-    //         'https://www.facebook.com',
-    //         'https://www.twitter.com'
-    //     ],
-    //     campaignMedium: [
-    //         'facebook',
-    //         'fb',
-    //         'facebook ads',
-    //         'google',
-    //         'youTube',
-    //         'pinterest'
-    //     ],
-    //     campaignSource: [
-    //         'facebook',
-    //         'fb',
-    //         'facebook ads',
-    //         'google',
-    //         'youtube',
-    //         'pinterest'
-    //     ],
-    //     campaignName: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    //     campaignId: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    //     campaignTerm: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    //     campaignContext: [
-    //         'campaign1',
-    //         'campaign2',
-    //         'campaign3'
-    //     ],
-    // }
 
     const handleOptionalFields = () => {
         if (optionalFields === true) {
@@ -81,10 +38,10 @@ const CampaignBuilder = () => {
             if (!linkInputs[parameter]) {
                 return;
             }
-            if (options[parameter].includes(linkInputs[parameter])) {
-                console.log('Already in options array')
-            } else {
+            if (!utmParameters[parameter].includes(linkInputs[parameter])){
                 API.createUtmParameter(parameter, linkInputs[parameter], user.sub)
+            } else {
+                console.log("Already in DB", parameter)
             };
         }
     }
