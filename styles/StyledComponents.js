@@ -118,3 +118,13 @@ export const HelperText = styled.p`
     margin: 5px 20px 0px 20px;
     font-size: 13px;
 `
+
+export const StyledLoading = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    width: 100vw;
+    height: 100vh;
+`

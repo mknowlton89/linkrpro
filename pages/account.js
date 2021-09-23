@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useUser } from '@auth0/nextjs-auth0';
+import TopNav from '../components/TopNav';
 const axios = require('axios');
 
-const user = () => {
+const account = () => {
     const { user, error, isLoading } = useUser();
 
     if (isLoading) return <div>Loading...</div>;
@@ -24,6 +25,7 @@ const user = () => {
     return (
         user && (
             <div>
+                <TopNav />
                 <img src={user.picture} alt={user.name} />
                 <h2>{user.name}</h2>
                 <p>{user.email}</p>
@@ -33,7 +35,7 @@ const user = () => {
     )
 }
 
-export default user
+export default account
 
 
 

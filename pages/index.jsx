@@ -1,14 +1,14 @@
-import Head from 'next/head'
 import clientPromise from '../lib/mongodb'
 import { useUser } from '@auth0/nextjs-auth0'
 import CampaignBuilder from '../components/CampaignBuilder'
-import LinkHistory from '../components/LinkHistory'
+import TopNav from '../components/TopNav'
 
 export default function Home({ isConnected }) {
   const { user } = useUser();
 
   return (
     <>
+      <TopNav />
       <CampaignBuilder />
       {/* <LinkHistory /> */}
     </>

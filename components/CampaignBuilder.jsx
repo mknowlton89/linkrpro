@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useUser } from '@auth0/nextjs-auth0'
-import { HelperText, PageContentWrapper } from '../styles/StyledComponents'
+import { HelperText, PageContentWrapper, StyledLoading } from '../styles/StyledComponents'
 import Button from './Button';
 import TextInput from './TextInput'
 import API from '../utils/API'
@@ -38,7 +38,7 @@ const CampaignBuilder = () => {
             if (!linkInputs[parameter]) {
                 return;
             }
-            if (!utmParameters[parameter].includes(linkInputs[parameter])){
+            if (!utmParameters[parameter].includes(linkInputs[parameter])) {
                 API.createUtmParameter(parameter, linkInputs[parameter], user.sub)
             } else {
                 console.log("Already in DB", parameter)
@@ -108,133 +108,134 @@ const CampaignBuilder = () => {
         }
     }, [user]);
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <StyledLoading />;
     if (error) return <div>{error.message}</div>;
 
     return (
-        <>
-            <PageContentWrapper>
-                <h1>Build a Trackable URL</h1>
-                <h5>Fill out all of the required fields and we'll generate a link for you.</h5>
+        user && (
+            <>
+                <PageContentWrapper>
+                    <h1>Build a Trackable URL</h1>
+                    <h5>Fill out all of the required fields and we'll generate a link for you.</h5>
 
-                <div className="required-text-div">
-                    <span className="required-text-span">* Indicates a field is required</span>
-                </div>
-
-                <div>
-                    <TextInput
-                        fieldPreviewText="Destination URL *"
-                        fieldName="campaignUrl"
-                        fieldType="url"
-                        linkInputs={linkInputs}
-                        setLinkInputs={setLinkInputs}
-                        options={utmParameters}
-                    />
-                    <HelperText>The full website URL where you want traffic to go. (e.g. https://www.example.com)</HelperText>
-                </div>
-
-                <div className="source-medium-name-wrapper">
-                    <div>
-                        <TextInput
-                            fieldPreviewText="Campaign Source *"
-                            fieldName="campaignSource"
-                            fieldType="string"
-                            linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs}
-                            options={utmParameters}
-                        />
-                        <HelperText>The referrer (e.g. google, newsletter)</HelperText>
-                    </div>
-
-                    <div className="middle-input">
-                        <TextInput
-                            fieldPreviewText="Campaign Medium *"
-                            fieldName="campaignMedium"
-                            fieldType="string"
-                            linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs}
-                            options={utmParameters}
-                        />
-                        <HelperText>Marketing medium (e.g. cpc, banner, email)</HelperText>
+                    <div className="required-text-div">
+                        <span className="required-text-span">* Indicates a field is required</span>
                     </div>
 
                     <div>
                         <TextInput
-                            fieldPreviewText="Campaign Name *"
-                            fieldName="campaignName"
-                            fieldType="string"
+                            fieldPreviewText="Destination URL *"
+                            fieldName="campaignUrl"
+                            fieldType="url"
                             linkInputs={linkInputs}
                             setLinkInputs={setLinkInputs}
                             options={utmParameters}
                         />
-                        <HelperText>Product, promo code, or slogan (e.g. spring_sale) One of campaign name or campaign id are required.</HelperText>
+                        <HelperText>The full website URL where you want traffic to go. (e.g. https://www.example.com)</HelperText>
                     </div>
-                </div>
 
-                <div>
-                    <p className="show-optional-fields" onClick={() => handleOptionalFields()}>
-                        {optionalFields ? "- - - - Hide Optional Fields - - - - -" : "- - - - - Show Optional Fields - - - - -"}
-                    </p>
-                </div>
-                <div className={!optionalFields ? 'hidden' : ''}>
+                    <div className="source-medium-name-wrapper">
+                        <div>
+                            <TextInput
+                                fieldPreviewText="Campaign Source *"
+                                fieldName="campaignSource"
+                                fieldType="string"
+                                linkInputs={linkInputs}
+                                setLinkInputs={setLinkInputs}
+                                options={utmParameters}
+                            />
+                            <HelperText>The referrer (e.g. google, newsletter)</HelperText>
+                        </div>
+
+                        <div className="middle-input">
+                            <TextInput
+                                fieldPreviewText="Campaign Medium *"
+                                fieldName="campaignMedium"
+                                fieldType="string"
+                                linkInputs={linkInputs}
+                                setLinkInputs={setLinkInputs}
+                                options={utmParameters}
+                            />
+                            <HelperText>Marketing medium (e.g. cpc, banner, email)</HelperText>
+                        </div>
+
+                        <div>
+                            <TextInput
+                                fieldPreviewText="Campaign Name *"
+                                fieldName="campaignName"
+                                fieldType="string"
+                                linkInputs={linkInputs}
+                                setLinkInputs={setLinkInputs}
+                                options={utmParameters}
+                            />
+                            <HelperText>Product, promo code, or slogan (e.g. spring_sale) One of campaign name or campaign id are required.</HelperText>
+                        </div>
+                    </div>
+
                     <div>
-                        <TextInput
-                            fieldPreviewText="Campaign ID"
-                            fieldName="campaignId"
-                            fieldType="string"
-                            linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs}
-                            options={utmParameters}
-                        />
-                        <HelperText>The ads campaign id.</HelperText>
+                        <p className="show-optional-fields" onClick={() => handleOptionalFields()}>
+                            {optionalFields ? "- - - - Hide Optional Fields - - - - -" : "- - - - - Show Optional Fields - - - - -"}
+                        </p>
+                    </div>
+                    <div className={!optionalFields ? 'hidden' : ''}>
+                        <div>
+                            <TextInput
+                                fieldPreviewText="Campaign ID"
+                                fieldName="campaignId"
+                                fieldType="string"
+                                linkInputs={linkInputs}
+                                setLinkInputs={setLinkInputs}
+                                options={utmParameters}
+                            />
+                            <HelperText>The ads campaign id.</HelperText>
+                        </div>
+
+
+                        <div>
+                            <TextInput
+                                fieldPreviewText="Campaign Term"
+                                fieldName="campaignTerm"
+                                fieldType="string"
+                                linkInputs={linkInputs}
+                                setLinkInputs={setLinkInputs}
+                                options={utmParameters}
+                            />
+                            <HelperText>Identify the paid keywords</HelperText>
+                        </div>
+
+                        <div>
+                            <TextInput
+                                fieldPreviewText="Campaign Context"
+                                fieldName="campaignContext"
+                                fieldType="string"
+                                linkInputs={linkInputs}
+                                setLinkInputs={setLinkInputs}
+                                options={utmParameters}
+                            />
+                            <HelperText>Use to differentiate ads</HelperText>
+                        </div>
                     </div>
 
+                    <Button
+                        onClick={() => generateLink()}
+                        primary
+                        disabled={isButtonDisabled && 'disabled'}>
+                        Generate Link</Button>
 
-                    <div>
-                        <TextInput
-                            fieldPreviewText="Campaign Term"
-                            fieldName="campaignTerm"
-                            fieldType="string"
-                            linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs}
-                            options={utmParameters}
-                        />
-                        <HelperText>Identify the paid keywords</HelperText>
+                    <div
+                        className={`link-wrapper ${!generatedLinkWrapper ? 'hidden' : ''}`}>
+                        <p className="generated-link">
+                            {generatedLink}
+                        </p>
+                        <p
+                            onClick={copyToClipboard}
+                            className="copy-btn">
+                            {!isLinkCopied ? 'COPY TO CLIPBOARD' : 'COPIED!'}
+                        </p>
                     </div>
+                </PageContentWrapper>
 
-                    <div>
-                        <TextInput
-                            fieldPreviewText="Campaign Context"
-                            fieldName="campaignContext"
-                            fieldType="string"
-                            linkInputs={linkInputs}
-                            setLinkInputs={setLinkInputs}
-                            options={utmParameters}
-                        />
-                        <HelperText>Use to differentiate ads</HelperText>
-                    </div>
-                </div>
-
-                <Button
-                    onClick={() => generateLink()}
-                    primary
-                    disabled={isButtonDisabled && 'disabled'}>
-                    Generate Link</Button>
-
-                <div
-                    className={`link-wrapper ${!generatedLinkWrapper ? 'hidden' : ''}`}>
-                    <p className="generated-link">
-                        {generatedLink}
-                    </p>
-                    <p
-                        onClick={copyToClipboard}
-                        className="copy-btn">
-                        {!isLinkCopied ? 'COPY TO CLIPBOARD' : 'COPIED!'}
-                    </p>
-                </div>
-            </PageContentWrapper>
-
-            <style jsx>{`
+                <style jsx>{`
             h1 {
                 margin-bottom: 0px;
             }
@@ -329,7 +330,8 @@ const CampaignBuilder = () => {
             }
 
             `}</style>
-        </>
+            </>
+        )
     )
 }
 
