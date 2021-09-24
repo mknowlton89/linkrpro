@@ -2,16 +2,28 @@ import clientPromise from '../lib/mongodb'
 import { useUser } from '@auth0/nextjs-auth0'
 import CampaignBuilder from '../components/CampaignBuilder'
 import TopNav from '../components/TopNav'
+import LoginRequired from '../components/LoginRequired';
+import { StyledLoading } from '../styles/StyledComponents';
 
 export default function Home({ isConnected }) {
-  const { user } = useUser();
+  const { user, isLoading, error } = useUser();
+
+  const goToLogin = () => {
+    router.push('api/auth/login')
+  }
+
+  if (isLoading) return <StyledLoading><div>Loading...</div></StyledLoading>;
+  if (error) return <div>{error.message}</div>;
 
   return (
-    <>
-      <TopNav />
-      <CampaignBuilder />
-      {/* <LinkHistory /> */}
-    </>
+    user ? (
+      <>
+        <TopNav />
+        <CampaignBuilder />
+        {/* <LinkHistory /> */}
+      </>
+    ) :
+      <LoginRequired />
   )
 }
 

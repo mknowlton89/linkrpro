@@ -25,7 +25,6 @@ export const StyledInput = styled.input`
     margin: 30px 0px 0px 0px;
     font-size: 18px;
     color: black;
-    padding: 0px 20px;
     width: 100%;
     background-color: white;
 
@@ -35,6 +34,7 @@ export const StyledInput = styled.input`
 
     ::placeholder {
         color: black;
+        padding-left: 25px;
     }
 `
 

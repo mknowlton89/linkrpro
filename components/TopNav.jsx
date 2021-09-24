@@ -18,6 +18,7 @@ const TopNav = () => {
                 </div>
                 <div className="profile-wrapper">
                     <a href="/account">Account</a>
+                    <a href="/account">My Links</a>
                     <a href="/api/auth/logout">Logout</a>
                     <img src={user.picture} />
                 </div>
@@ -38,9 +39,12 @@ const TopNav = () => {
                 }
 
                 a {
-                    padding-left: 20px;
                     text-decoration: none;
                     color: black;
+                }
+
+                .profile-wrapper a {
+                    padding-left: 20px;
                 }
 
                 a:hover {
@@ -53,7 +57,7 @@ const TopNav = () => {
                 }
 
                 .logo {
-                    font-size: 30px;
+                    font-size: 25px;
                     font-weight: bold;
                 }
 
