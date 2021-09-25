@@ -26,11 +26,18 @@ export default {
             user: user,
         })
     },
-    getLinkHistoryById: function (mongoId) {
-        let userId = mongoId.split('|')
+    // getLinkHistoryById: function (mongoId) {
+    //     let userId = mongoId.split('|')
+    //     return axios.get('/api/links/history', {
+    //         params: {
+    //             id: userId[1]
+    //         }
+    //     })
+    // },
+    getLinkHistoryById: function (userId) {
         return axios.get('/api/links/history', {
             params: {
-                id: userId[1]
+                id: userId
             }
         })
     },

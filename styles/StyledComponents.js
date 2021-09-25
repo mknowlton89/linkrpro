@@ -36,6 +36,10 @@ export const StyledInput = styled.input`
         color: black;
         padding-left: 25px;
     }
+
+    ::input {
+        padding-left: 25px;
+    }
 `
 
 export const StyledSelect = styled.select`

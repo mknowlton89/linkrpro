@@ -17,8 +17,9 @@ const TopNav = () => {
 
                 </div>
                 <div className="profile-wrapper">
-                    <a href="/account">Account</a>
+                    <a href="/">Create</a>
                     <a href="/account">My Links</a>
+                    <a href="/account">Account</a>
                     <a href="/api/auth/logout">Logout</a>
                     <img src={user.picture} />
                 </div>

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Button from '../components/Button'
 import { StyledInput, StyledSelect, SubHeader } from '../styles/StyledComponents'
 import DropDown from '../components/DropDown'
-import TextInput from '../components/TextInput';
+// import TextInput from '../components/TextInput';
 
 export default function Home() {
   return (
@@ -54,15 +54,15 @@ export default function Home() {
 
             <div className='asset-card'>
               <SubHeader>Enter a Medium</SubHeader>
-              <div>
-                <TextInput fieldType="Medium"/>
-              </div>
+              {/* <div> */}
+                {/* <TextInput fieldType="Medium"/>
+              </div> */}
             </div>
             <div className='asset-card'>
               <SubHeader>Enter a Source</SubHeader>
-              <div>
-                <TextInput fieldType="Source"/>
-              </div>
+              {/* <div> */}
+                {/* <TextInput fieldType="Source"/> */}
+              {/* </div> */}
             </div>
         </main>
 
