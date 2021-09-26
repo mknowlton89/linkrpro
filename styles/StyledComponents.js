@@ -139,6 +139,17 @@ export const StyledLink = styled.a`
     border-radius: 5px;
     font-size: 22px;
     padding: 10px 30px;
-    margin: 10px 0px;
+    margin: 10px;
     text-decoration: none;
+`
+
+export const StyledSecondaryLink = styled.a`
+    border-radius: 5px;
+    font-size: 22px;
+    padding: 10px 30px;
+    margin: 10px;
+    text-decoration: none;
+    background: white;
+    color: palevioletred;
+    border: 3px solid palevioletred;
 `

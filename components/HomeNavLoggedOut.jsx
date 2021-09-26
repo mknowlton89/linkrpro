@@ -1,6 +1,6 @@
 import React from 'react'
 import { useUser } from '@auth0/nextjs-auth0'
-import { StyledButton, StyledLink, StyledLoading } from '../styles/StyledComponents';
+import { StyledButton, StyledLink, StyledLoading, StyledSecondaryLink } from '../styles/StyledComponents';
 import Button from './Button';
 
 const HomeNavLoggedOut = () => {
@@ -16,7 +16,8 @@ const HomeNavLoggedOut = () => {
 
             </div>
             <div className="profile-wrapper">
-                <StyledLink href="/api/auth/login">Login</StyledLink>
+                <StyledSecondaryLink className="secondary" href="/api/auth/login">Login</StyledSecondaryLink>
+                <StyledLink className="primary" href="/signup">Try it Free</StyledLink>
             </div>
 
             <style jsx>{`
@@ -37,6 +38,10 @@ const HomeNavLoggedOut = () => {
                 a {
                     text-decoration: none;
                     color: black;
+                }
+
+                .profile-wrapper a {
+                    margin-left: 10px;
                 }
 
                 a:hover {
