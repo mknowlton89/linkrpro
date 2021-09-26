@@ -4,7 +4,7 @@ import LinkHistory from '../components/LinkHistory'
 import LoginRequired from '../components/LoginRequired'
 import TopNav from '../components/TopNav'
 
-export const history = () => {
+export const mylinks = () => {
     const { user, error, isLoading } = useUser();
     return (
         user ? (
@@ -16,4 +16,4 @@ export const history = () => {
     )
 }
 
-export default history
+export default mylinks

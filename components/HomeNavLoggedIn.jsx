@@ -1,9 +1,9 @@
 import React from 'react'
 import { useUser } from '@auth0/nextjs-auth0'
-import { StyledButton, StyledLoading } from '../styles/StyledComponents';
+import { StyledButton, StyledLink, StyledLoading } from '../styles/StyledComponents';
 import Button from './Button';
 
-const TopNav = () => {
+const HomeNavLoggedIn = () => {
     const { user, error, isLoading } = useUser();
 
     if (isLoading) return <StyledLoading />;
@@ -17,11 +17,8 @@ const TopNav = () => {
 
                 </div>
                 <div className="profile-wrapper">
-                    <a href="/create">Create</a>
-                    <a href="/mylinks">My Links</a>
-                    <a href="/account">Account</a>
-                    <a href="/api/auth/logout">Logout</a>
-                    <img src={user.picture} />
+                    <a className="logout" href="/api/auth/logout">Logout</a>
+                    <StyledLink href="/create">Dashboard</StyledLink>
                 </div>
 
                 <style jsx>{`
@@ -46,6 +43,7 @@ const TopNav = () => {
 
                 .profile-wrapper a {
                     padding-left: 20px;
+                    padding-right: 20px;
                 }
 
                 a:hover {
@@ -62,10 +60,14 @@ const TopNav = () => {
                     font-weight: bold;
                 }
 
+                .logout {
+                    font-style: italics;
+                }
+
             `}</style>
             </div>
         )
     )
 }
 
-export default TopNav
+export default HomeNavLoggedIn

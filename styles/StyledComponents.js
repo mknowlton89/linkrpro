@@ -132,3 +132,13 @@ export const StyledLoading = styled.div`
     width: 100vw;
     height: 100vh;
 `
+
+export const StyledLink = styled.a`
+    background: palevioletred;
+    color: white;
+    border-radius: 5px;
+    font-size: 22px;
+    padding: 10px 30px;
+    margin: 10px 0px;
+    text-decoration: none;
+`
