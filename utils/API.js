@@ -8,6 +8,10 @@ export default {
             user: user,
         })
     },
+    createNewUser: function (newUser) {
+        // console.log(newUser)
+            return axios.post("/api/user", newUser);
+          },
     createUtmParameter: function (parameter, utmParameter, user) {
         return axios.post(`/api/utm-parameters/${parameter}`, {
             parameter: utmParameter,

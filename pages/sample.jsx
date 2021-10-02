@@ -1,22 +1,23 @@
-import React from 'react'
-import { useUser } from '@auth0/nextjs-auth0';
-import { StyledLoading } from '../styles/StyledComponents';
-import LoginRequired from '../components/LoginRequired'
+import React, { useEffect } from 'react'
+import API from '../utils/API';
 
 const SamplePage = () => {
-    const { user, error, isLoading } = useUser();
 
-    if (isLoading) return <StyledLoading><h2>Loading...</h2></StyledLoading>;
-    if (error) return <div>{error.message}</div>;
+    useEffect(() => {
+        API.createNewUser({
+            email: 'mknowlton89+10@gmail.com',
+            password: "test",
+        })
+            .then(res => console.log(res))
+            .catch (err => console.log(err))
+    }, [])
 
     return (
-        user ? (
             <>
                 <div>
                     <h1>Hello from Sample Page</h1>
                 </div>
             </>
-        ) : <LoginRequired />
 
     )
 }

@@ -12,7 +12,8 @@ const signup = () => {
         AUTH0.createNewUser(newUserData)
             .then((res) => {
                 if (res.status === 200) {
-                    router.push('/')
+                    // AUTH0.getUserToken()
+                    // router.push('/')
                 }
             })
 

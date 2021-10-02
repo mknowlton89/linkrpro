@@ -1,4 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+
+useEffect(() => {
+    effect
+    }
+}, [input])
 
 export const welcome = () => {
     return (
