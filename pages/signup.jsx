@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { FlexCentered, FlexColumnDiv, StyledInput } from '../styles/StyledComponents'
 import Button from '../components/Button'
-import AUTH0 from '../utils/AUTH0';
+import API from '../utils/API'
 
 const signup = () => {
     const [newUserData, setNewUserData] = useState({});
     const router = useRouter()
 
     const handleSubmit = () => {
-        AUTH0.createNewUser(newUserData)
+        API.createNewUser(newUserData)
             .then((res) => {
                 if (res.status === 200) {
-                    // AUTH0.getUserToken()
-                    // router.push('/')
+                    router.push('/welcome')
                 }
             })
 
@@ -24,14 +23,12 @@ const signup = () => {
         setNewUserData({ ...newUserData, [fieldName]: input })
     }
 
-    // useEffect(() => {
-    //     API.getHelloTest()
-    //     .then((res) => console.log(res.data))
-    //     .catch ((err) => console.log(err))
-    //     return () => {}
-    // }, []);
+    const handlePasswordValidation = (input) => {
 
-    console.log(newUserData);
+        if (input !== newUserData.password){
+            console.log("Passwords dont match")
+        }
+    }
 
     return (
         <>
@@ -41,18 +38,18 @@ const signup = () => {
 
                     <StyledInput
                         type="text"
-                        setNewUserData={setNewUserData}
+                        // setNewUserData={setNewUserData}
                         placeholder="Enter your Email"
                         onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
-                    {/* <StyledInput
-                    type="password"
-                    placeholder="Enter your password" /> */}
-
                     <StyledInput
                         type="password"
-                        setNewUserData={setNewUserData}
+                        onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'password')}
+                        placeholder="Enter your password" />
+                    <StyledInput
+                        type="password"
+                        // setNewUserData={setNewUserData}
                         placeholder="Confirm your password"
-                        onChange={(e) => handleInputChange(e.target.value, 'password')} />
+                        onChange={(e) => handlePasswordValidation(e.target.value, 'password')} />
                     <Button onClick={handleSubmit} primary>Create Your Account</Button>
                 </div>
             </FlexCentered>

@@ -1,10 +1,5 @@
 import React, { useEffect } from 'react';
 
-useEffect(() => {
-    effect
-    }
-}, [input])
-
 export const welcome = () => {
     return (
         <div>
@@ -12,3 +7,5 @@ export const welcome = () => {
         </div>
     )
 }
+
+export default welcome

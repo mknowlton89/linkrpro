@@ -9,7 +9,6 @@ export default {
         })
     },
     createNewUser: function (newUser) {
-        // console.log(newUser)
             return axios.post("/api/user", newUser);
           },
     createUtmParameter: function (parameter, utmParameter, user) {
