@@ -3,9 +3,13 @@ import { useRouter } from 'next/router'
 import { FlexCentered, FlexColumnDiv, StyledInput } from '../styles/StyledComponents'
 import Button from '../components/Button'
 import API from '../utils/API'
+import { set } from 'mongoose'
 
 const signup = () => {
     const [newUserData, setNewUserData] = useState({});
+    const [error, setError] = useState(false);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [passwordsMatch, setPasswordsMatch] = useState(false);
     const router = useRouter()
 
     const handleSubmit = () => {
@@ -15,20 +19,29 @@ const signup = () => {
                     router.push('/welcome')
                 }
             })
-
-            .catch(err => console.log(err))
+            .catch(err => setError(true))
     }
 
     const handleInputChange = (input, fieldName) => {
         setNewUserData({ ...newUserData, [fieldName]: input })
     }
 
-    const handlePasswordValidation = (input) => {
-
-        if (input !== newUserData.password){
-            console.log("Passwords dont match")
+    useEffect(() => {
+        if (newUserData.email && (newUserData.password && newUserData.password.length >= 6) && passwordsMatch) {
+            setIsButtonDisabled(false);
         }
-    }
+    }, [newUserData, passwordsMatch])
+
+    useEffect(() => {
+        if (newUserData.passwordConfirmation === newUserData.password){
+            setPasswordsMatch(true);
+        } else {
+            setPasswordsMatch(false);
+        }
+    }, [newUserData])
+
+    console.log(newUserData)
+    console.log(passwordsMatch)
 
     return (
         <>
@@ -38,19 +51,18 @@ const signup = () => {
 
                     <StyledInput
                         type="text"
-                        // setNewUserData={setNewUserData}
                         placeholder="Enter your Email"
                         onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
                     <StyledInput
                         type="password"
-                        onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'password')}
-                        placeholder="Enter your password" />
+                        onChange={(e) => handleInputChange(e.target.value, 'password')}
+                        placeholder="Enter your password between 6 and 50 characters" />
                     <StyledInput
                         type="password"
-                        // setNewUserData={setNewUserData}
                         placeholder="Confirm your password"
-                        onChange={(e) => handlePasswordValidation(e.target.value, 'password')} />
-                    <Button onClick={handleSubmit} primary>Create Your Account</Button>
+                        onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
+                    {error && <p className="error">Please ensure you entered a valid email.</p>}
+                    <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
                 </div>
             </FlexCentered>
 
@@ -61,6 +73,12 @@ const signup = () => {
                 flex-direction: column;
                 width: 60%;
                 text-align: center;
+            }
+
+            .error {
+                color: tomato;
+                font-size: 18px;
+                text-align: left;
             }
 
             `}</style>

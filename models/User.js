@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs")
 
+var validateEmail = function(email) {
+  var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  return re.test(email)
+};
+
 const UserSchema = new mongoose.Schema(
   {
     // firstName: {
@@ -16,8 +21,11 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       trim: true,
-      // unique: true,
-      // required: "email is required"
+      lowercase: true,
+      unique: true,
+      required: [true, 'Please provide an email.'],
+      validate: [validateEmail, 'Please fill a valid email address'],
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     // businessName: {
     //   type: String,
@@ -26,7 +34,9 @@ const UserSchema = new mongoose.Schema(
     // },
     password: {
       type: String,
-    //   required: true
+      minlength: [6, 'Password must be between 6 and 50 characters'],
+      maxlength: [50, 'Password must be between 6 and 50 characters'],
+      required: [true, 'A password is required']
     }
     // openingTime: {
     //   type: String,
@@ -44,8 +54,6 @@ const UserSchema = new mongoose.Schema(
 
   UserSchema.pre("save", function (next) {
     const user = this
-
-    console.log('save was called')
 
     if (this.isModified("password") || this.isNew) {
       bcrypt.genSalt(10, function (saltError, salt) {
@@ -66,5 +74,15 @@ const UserSchema = new mongoose.Schema(
       return next()
     }
   });
+
+  UserSchema.methods.comparePassword = function (password, callback) {
+    bcrypt.compare(password, this.password, function (error, isMatch) {
+      if (error) {
+        return callback(error)
+      } else {
+        callback(null, isMatch)
+      }
+    })
+  }
 
   export default mongoose.models.User || mongoose.model('User', UserSchema)
