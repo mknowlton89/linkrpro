@@ -1,11 +1,14 @@
 // pages/_app.js
-import React from 'react';
-import { UserProvider } from '@auth0/nextjs-auth0';
+import React, { useContext } from 'react';
+// import { UserProvider } from '@auth0/nextjs-auth0';
 
 export default function App({ Component, pageProps }) {
+  const [currentUser, setCurrentUser] = useState({});
+
+
   return (
-    <UserProvider>
+    <UserContext.Provider value={currentUser}>
       <Component {...pageProps} />
-    </UserProvider>
+    </UserContext.Provider>
   );
 }

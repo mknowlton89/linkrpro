@@ -15,6 +15,10 @@ const signup = () => {
     const handleSubmit = () => {
         API.createNewUser(newUserData)
             .then((res) => {
+                console.log(res)
+                // Add the token to local storage.
+                // Add it to a useContext hook
+                    // Store the token
                 if (res.status === 200) {
                     router.push('/welcome')
                 }
@@ -39,9 +43,6 @@ const signup = () => {
             setPasswordsMatch(false);
         }
     }, [newUserData])
-
-    console.log(newUserData)
-    console.log(passwordsMatch)
 
     return (
         <>
