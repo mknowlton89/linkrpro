@@ -1,21 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { FlexCentered, FlexColumnDiv, StyledInput } from '../styles/StyledComponents'
+import { FlexCentered, StyledInput } from '../styles/StyledComponents'
 import Button from '../components/Button'
 import API from '../utils/API'
-import { set } from 'mongoose'
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const signup = () => {
     const [newUserData, setNewUserData] = useState({});
     const [error, setError] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [passwordsMatch, setPasswordsMatch] = useState(false);
+    const { user, setUser } = useContext(UserContext);
     const router = useRouter()
 
     const handleSubmit = () => {
         API.createNewUser(newUserData)
             .then((res) => {
-                console.log(res)
+                // console.log(res.data.data._id)
+                setUser({
+                    _id: res.data.data._id,
+                    email: res.data.data.email,
+                    currentToken: res.data.token
+                })
+
+                window.localStorage.setItem('authToken', res.data.token);
                 // Add the token to local storage.
                 // Add it to a useContext hook
                     // Store the token

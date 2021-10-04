@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 export const welcome = () => {
 
-console.log(currentUser)
+    const { user, setUser } = useContext(UserContext);
+
+    console.log(user)
 
     return (
         <div>
-            <h1>Welcome!</h1>
+            <h1>Welcome, {user.email}</h1>
         </div>
     )
 }
