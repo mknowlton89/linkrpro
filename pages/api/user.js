@@ -7,16 +7,6 @@ export default async function handler(req, res) {
 
     try {
         const newUser = await User.create(req.body)
-            // .then(() => {
-            //     if (newUser) {
-            //         console.log(newUser._id)
-            //         console.log(newUser.email)
-            //         // let authToken = jwt.sign({
-            //         //     userId: newUser._id,
-            //         //     email: newUser.email
-            //         // })
-            //     }
-            // })
 
             let authToken = jwt.sign({
                 userId: newUser._id,

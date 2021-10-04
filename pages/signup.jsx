@@ -17,7 +17,6 @@ const signup = () => {
     const handleSubmit = () => {
         API.createNewUser(newUserData)
             .then((res) => {
-                // console.log(res.data.data._id)
                 setUser({
                     _id: res.data.data._id,
                     email: res.data.data.email,
@@ -25,9 +24,6 @@ const signup = () => {
                 })
 
                 window.localStorage.setItem('authToken', res.data.token);
-                // Add the token to local storage.
-                // Add it to a useContext hook
-                    // Store the token
                 if (res.status === 200) {
                     router.push('/welcome')
                 }

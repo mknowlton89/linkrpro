@@ -104,14 +104,14 @@ export default {
     //       }
     //     })
     //   },
-    //   loginUser: function (userLoginData) {
-    //     return axios.get("/api/users/", {
-    //       params: {
-    //         email: userLoginData.email,
-    //         password: userLoginData.password
-    //       }
-    //     });
-    //   },
+      loginUser: function (userLoginData) {
+        return axios.get("/api/login/", {
+          params: {
+            email: userLoginData.email,
+            password: userLoginData.password
+          }
+        });
+      },
     //   saveAppointment: function (appointmentData) {
     //     return axios.post("/api/appointments", appointmentData);
     //   },
