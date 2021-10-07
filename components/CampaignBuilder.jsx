@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import { useUser } from '@auth0/nextjs-auth0'
 import { HelperText, PageContentWrapper, StyledLoading } from '../styles/StyledComponents'
 import Button from './Button';
 import TextInput from './TextInput'

@@ -43,7 +43,7 @@ export default function create() {
   return (
     user ? (
       <>
-        {/* <TopNav /> */}
+        <TopNav />
         <CampaignBuilder />
         {/* <LinkHistory /> */}
       </>
