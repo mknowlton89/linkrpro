@@ -1,17 +1,17 @@
-import clientPromise from '../../../lib/mongodb'
+import dbConnect from "../../../lib/dbConnect";
+import Link from "../../../models/Link";
 
 export default async (req, res) => {
 
-    console.log(req.query.id)
+    await dbConnect()
+    console.log(req)
 
-    const client = await clientPromise
-    const db = client.db();
-
-    const linkHistory = await db
-        .collection("links")
-        .find({ user: req.query.id })
-        .limit(100)
-        .toArray()
-
-    res.json(linkHistory)
+    try {
+        let results = await Link.find({
+            user: req.query.id
+        })
+        res.status(200).json(results)
+    } catch (error) {
+        res.status(400).json({Error: "An error occurred. Please try again."})
+    }
 };

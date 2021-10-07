@@ -1,6 +1,4 @@
 import React from 'react'
-import { StyledButton, StyledLoading } from '../styles/StyledComponents';
-import Button from './Button';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { useRouter } from 'next/router'
@@ -25,7 +23,6 @@ const TopNav = () => {
                     <a href="/create">Create</a>
                     <a href="/mylinks">My Links</a>
                     <a href="/account">Account</a>
-                    {/* <a href="/api/auth/logout">Logout</a> */}
                     <button onClick={handleLogout}>Logout</button>
                 </div>
 
