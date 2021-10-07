@@ -1,6 +1,14 @@
 import axios from "axios";
 
 export default {
+    authorizeUser: function (authToken) {
+        console.log('Auth user was called')
+        return axios.post("/api/auth/", {
+          params: {
+            token: authToken
+          }
+        });
+      },
     createNewLink: function (newLink, user) {
         console.log(newLink, user)
         return axios.post('/api/links/new', {
