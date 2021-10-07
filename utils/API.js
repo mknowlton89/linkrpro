@@ -2,7 +2,6 @@ import axios from "axios";
 
 export default {
     authorizeUser: function (authToken) {
-        console.log('Auth user was called')
         return axios.post("/api/auth/", {
           params: {
             token: authToken
@@ -20,23 +19,24 @@ export default {
             return axios.post("/api/user", newUser);
           },
     createUtmParameter: function (parameter, utmParameter, user) {
-        return axios.post(`/api/utm-parameters/${parameter}`, {
-            parameter: utmParameter,
+        return axios.post(`/api/utm-parameters/create-all`, {
+            parameter: parameter,
+            parameterValue: utmParameter,
             user: user,
         })
     },
-    createUtmSource: function (campaignSource, user) {
-        return axios.post('/api/utm-parameters/new-source', {
-            campaignSource: campaignSource,
-            user: user,
-        })
-    },
-    createUtmUrl: function (campaignUrl, user) {
-        return axios.post('/api/utm-parameters/new-url', {
-            campaignUrl: campaignUrl,
-            user: user,
-        })
-    },
+    // createUtmSource: function (campaignSource, user) {
+    //     return axios.post('/api/utm-parameters/new-source', {
+    //         campaignSource: campaignSource,
+    //         user: user,
+    //     })
+    // },
+    // createUtmUrl: function (campaignUrl, user) {
+    //     return axios.post('/api/utm-parameters/new-url', {
+    //         campaignUrl: campaignUrl,
+    //         user: user,
+    //     })
+    // },
     // getLinkHistoryById: function (mongoId) {
     //     let userId = mongoId.split('|')
     //     return axios.get('/api/links/history', {

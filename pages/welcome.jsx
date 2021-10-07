@@ -29,7 +29,6 @@ export const welcome = () => {
                         currentToken: authToken
                     })
                 })
-                //
                 .catch((err) => {
                     router.push('/login')
                 })

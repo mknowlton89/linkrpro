@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs")
 
-const CampaignUrlSchema = new mongoose.Schema(
+const CampaignNameSchema = new mongoose.Schema(
   {
-    campaignUrl: {
+    campaignName: {
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
+      // unique: true,
       required: [true, 'Please provide an email.'],
     },
     user: {
@@ -16,4 +17,4 @@ const CampaignUrlSchema = new mongoose.Schema(
     }
   });
 
-  export default mongoose.models.CampaignUrl || mongoose.model('CampaignUrl', CampaignUrlSchema)
+  export default mongoose.models.CampaignName || mongoose.model('CampaignName', CampaignNameSchema)

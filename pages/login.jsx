@@ -8,7 +8,7 @@ import { UserContext } from '../context/UserContext';
 
 const login = () => {
     const [userLoginData, setUserLoginData] = useState({});
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     const router = useRouter()
 
     const handleSubmit = () => {

@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const CampaignUrlSchema = new mongoose.Schema(
+const CampaignTermSchema = new mongoose.Schema(
   {
-    campaignUrl: {
+    campaignTerm: {
       type: String,
       trim: true,
       lowercase: true,
       unique: true,
-      required: [true, 'Please provide an email.'],
+      required: [true, 'CampaignTerm is required'],
     },
     user: {
       type: String,
@@ -16,4 +16,4 @@ const CampaignUrlSchema = new mongoose.Schema(
     }
   });
 
-  export default mongoose.models.CampaignUrl || mongoose.model('CampaignUrl', CampaignUrlSchema)
+  export default mongoose.models.CampaignTerm || mongoose.model('CampaignTerm', CampaignTermSchema)

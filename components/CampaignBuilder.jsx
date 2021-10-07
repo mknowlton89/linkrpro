@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useUser } from '@auth0/nextjs-auth0'
+// import { useUser } from '@auth0/nextjs-auth0'
 import { HelperText, PageContentWrapper, StyledLoading } from '../styles/StyledComponents'
 import Button from './Button';
 import TextInput from './TextInput'
 import API from '../utils/API'
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const CampaignBuilder = () => {
-    const { user, error, isLoading } = useUser();
+    const { user } = useContext(UserContext);
     const [optionalFields, setOptionalFields] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [generatedLink, setGeneratedLink] = useState('');
@@ -33,21 +35,21 @@ const CampaignBuilder = () => {
     }
 
     const saveUtmParameters = () => {
-        //TODO: Update the API.createUtmParameter method and endpoint to use a switch case rather than multiple endpoints.
         for (const parameter in linkInputs) {
             if (!linkInputs[parameter]) {
                 return;
             }
-            if (!utmParameters[parameter].includes(linkInputs[parameter])) {
-                API.createUtmParameter(parameter, linkInputs[parameter], user.sub)
-            } else {
-                console.log("Already in DB", parameter)
-            };
+            API.createUtmParameter(parameter, linkInputs[parameter], user._id)
+            // if (!utmParameters[parameter].includes(linkInputs[parameter])) {
+            //     API.createUtmParameter(parameter, linkInputs[parameter], user.sub)
+            // } else {
+            //     console.log("Already in DB", parameter)
+            // };
         }
     }
 
     const saveLink = (link) => {
-        API.createNewLink(link, user.sub)
+        API.createNewLink(link, user._id)
         saveUtmParameters()
     };
 
@@ -80,36 +82,35 @@ const CampaignBuilder = () => {
         }
     }, [linkInputs])
 
-    useEffect(() => {
-        if (user) {
+    // useEffect(() => {
+    //     if (user) {
 
-            let utmParameterOptions = [
-                'campaignUrl',
-                'campaignSource',
-                'campaignMedium',
-                'campaignName',
-                'campaignId',
-                'campaignTerm',
-                'campaignContext',
-            ]
+    //         let utmParameterOptions = [
+    //             'campaignUrl',
+    //             'campaignSource',
+    //             'campaignMedium',
+    //             'campaignName',
+    //             'campaignId',
+    //             'campaignTerm',
+    //             'campaignContext',
+    //         ]
 
-            utmParameterOptions.forEach((parameter) => {
-                API.getUtmParameters(user.sub, parameter)
-                    .then((res) => {
-                        setUtmParameters(prevState => {
-                            return {
-                                ...prevState,
-                                [parameter]: res.data,
-                            }
-                        })
-                    })
-                    .catch(err => console.log(err))
-            })
-        }
-    }, [user]);
+    //         utmParameterOptions.forEach((parameter) => {
+    //             API.getUtmParameters(user._id, parameter)
+    //                 .then((res) => {
+    //                     setUtmParameters(prevState => {
+    //                         return {
+    //                             ...prevState,
+    //                             [parameter]: res.data,
+    //                         }
+    //                     })
+    //                 })
+    //                 .catch(err => console.log(err))
+    //         })
+    //     }
+    // }, [user]);
 
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>{error.message}</div>;
+    console.log(linkInputs);
 
     return (
         user && (

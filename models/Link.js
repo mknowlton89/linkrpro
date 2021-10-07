@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 
-const CampaignUrlSchema = new mongoose.Schema(
+const LinkSchema = new mongoose.Schema(
   {
-    campaignUrl: {
+    link: {
       type: String,
       trim: true,
       lowercase: true,
       unique: true,
-      required: [true, 'Please provide an email.'],
+      required: [true, 'Must provide link to create a link.'],
     },
     user: {
       type: String,
@@ -16,4 +16,4 @@ const CampaignUrlSchema = new mongoose.Schema(
     }
   });
 
-  export default mongoose.models.CampaignUrl || mongoose.model('CampaignUrl', CampaignUrlSchema)
+  export default mongoose.models.Link || mongoose.model('Link', LinkSchema)
