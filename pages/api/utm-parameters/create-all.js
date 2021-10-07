@@ -18,6 +18,7 @@ export default async (req, res) => {
               campaignUrl: req.body.parameterValue,
               user: req.body.user,
             })
+            res.status(201).json({Success: "Success - campaignUrl was saved."})
           } catch (error) {
             res.status(400).json({Error: "An error has occurred. Please try again."})
           }
@@ -29,6 +30,7 @@ export default async (req, res) => {
               campaignSource: req.body.parameterValue,
               user: req.body.user,
             })
+            res.status(201).json({Success: "Success - campaignSource was saved."})
           } catch (error) {
             res.status(400).json({Error: "An error has occurred. Please try again."})
           }
@@ -40,6 +42,7 @@ export default async (req, res) => {
             campaignMedium: req.body.parameterValue,
             user: req.body.user,
           })
+          res.status(201).json({Success: "Success - campaignMedium was saved."})
         } catch (error) {
           res.status(400).json({Error: "An error has occurred. Please try again."})
         }
@@ -51,6 +54,7 @@ export default async (req, res) => {
             campaignName: req.body.parameterValue,
             user: req.body.user,
           })
+          res.status(201).json({Success: "Success - campaignName was saved."})
         } catch (error) {
           res.status(400).json({Error: "An error has occurred. Please try again."})
         }
@@ -62,6 +66,7 @@ export default async (req, res) => {
               campaignId: req.body.parameterValue,
               user: req.body.user,
             })
+            res.status(201).json({Success: "Success - campaignId was saved."})
           } catch (error) {
             res.status(400).json({Error: "An error has occurred. Please try again."})
           }
@@ -73,6 +78,7 @@ export default async (req, res) => {
               campaignTerm: req.body.parameterValue,
               user: req.body.user,
             })
+            res.status(201).json({Success: "Success - campaignTerm was saved."})
           } catch (error) {
             res.status(400).json({Error: "An error has occurred. Please try again."})
           }
@@ -84,6 +90,7 @@ export default async (req, res) => {
               campaignContext: req.body.parameterValue,
               user: req.body.user,
             })
+            res.status(201).json({Success: "Success - campaignContext was saved."})
           } catch (error) {
             res.status(400).json({Error: "An error has occurred. Please try again."})
           }

@@ -23,7 +23,7 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
 
     const handleInputChange = (input, fieldName) => {
         setLinkInputs({ ...linkInputs, [fieldName]: input })
-        // handleInputFilter(input, fieldName);
+        handleInputFilter(input, fieldName);
     }
 
     const handleSelection = (value, fieldName) => {

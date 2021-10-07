@@ -39,12 +39,11 @@ const CampaignBuilder = () => {
             if (!linkInputs[parameter]) {
                 return;
             }
-            API.createUtmParameter(parameter, linkInputs[parameter], user._id)
-            // if (!utmParameters[parameter].includes(linkInputs[parameter])) {
-            //     API.createUtmParameter(parameter, linkInputs[parameter], user.sub)
-            // } else {
-            //     console.log("Already in DB", parameter)
-            // };
+            if (!utmParameters[parameter].includes(linkInputs[parameter])) {
+                API.createUtmParameter(parameter, linkInputs[parameter], user._id)
+            } else {
+                console.log("Already in DB", parameter)
+            };
         }
     }
 
@@ -82,35 +81,33 @@ const CampaignBuilder = () => {
         }
     }, [linkInputs])
 
-    // useEffect(() => {
-    //     if (user) {
+    useEffect(() => {
+        if (user) {
 
-    //         let utmParameterOptions = [
-    //             'campaignUrl',
-    //             'campaignSource',
-    //             'campaignMedium',
-    //             'campaignName',
-    //             'campaignId',
-    //             'campaignTerm',
-    //             'campaignContext',
-    //         ]
+            let utmParameterOptions = [
+                'campaignUrl',
+                'campaignSource',
+                'campaignMedium',
+                'campaignName',
+                'campaignId',
+                'campaignTerm',
+                'campaignContext',
+            ]
 
-    //         utmParameterOptions.forEach((parameter) => {
-    //             API.getUtmParameters(user._id, parameter)
-    //                 .then((res) => {
-    //                     setUtmParameters(prevState => {
-    //                         return {
-    //                             ...prevState,
-    //                             [parameter]: res.data,
-    //                         }
-    //                     })
-    //                 })
-    //                 .catch(err => console.log(err))
-    //         })
-    //     }
-    // }, [user]);
-
-    console.log(linkInputs);
+            utmParameterOptions.forEach((parameter) => {
+                API.getUtmParameters(user._id, parameter)
+                    .then((res) => {
+                        setUtmParameters(prevState => {
+                            return {
+                                ...prevState,
+                                [parameter]: res.data,
+                            }
+                        })
+                    })
+                    .catch(err => console.log(err))
+            })
+        }
+    }, [user]);
 
     return (
         user && (
