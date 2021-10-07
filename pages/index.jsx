@@ -3,7 +3,6 @@
 import { StyledLoading } from '../styles/StyledComponents';
 import HomeNav from '../components/HomeNav';
 import ProductCard from '../components/ProductCard';
-import SignupButton from '../components/SignupButton';
 // import ProductDisplay from '../components/ProductDisplay'
 
 export default function Home() {
@@ -18,11 +17,10 @@ export default function Home() {
 
   return (
     <>
-      {/* <HomeNav /> */}
+      <HomeNav />
       <h1>Hello from home</h1>
       {/* <ProductDisplay /> */}
       <ProductCard />
-      <SignupButton />
     </>
   )
 }
