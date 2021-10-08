@@ -1,17 +1,11 @@
-import clientPromise from '../../../lib/mongodb'
+import dbConnect from "../../../lib/dbConnect";
+import Link from "../../../models/Link";
 
 export default async (req, res) => {
 
-    const client = await clientPromise
-    const db = client.db();
+    await dbConnect()
 
-    // console.log(req.body.link)
-    var bodyJson = JSON.stringify(req.body.link)
-    // console.log(bodyJson)
-
-    const newLink = await db
-        .collection("links")
-        .insertOne({
+    let newLink = await Link.create({
             link: req.body.link.trim(),
             user: req.body.user,
         })

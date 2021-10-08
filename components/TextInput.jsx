@@ -16,7 +16,9 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
     const [isValid, setIsValid] = useState(true);
 
     const handleInputFilter = (input, fieldName) => {
-        setFilteredList(options[fieldName].filter((option) => option.includes(input)))
+        if (options[fieldName]) {
+            setFilteredList(options[fieldName].filter((option) => option.includes(input)))
+        }
     }
 
     const handleInputChange = (input, fieldName) => {

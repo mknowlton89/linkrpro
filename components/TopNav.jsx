@@ -1,13 +1,16 @@
 import React from 'react'
-import { useUser } from '@auth0/nextjs-auth0'
-import { StyledButton, StyledLoading } from '../styles/StyledComponents';
-import Button from './Button';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
+import { useRouter } from 'next/router'
 
 const TopNav = () => {
-    const { user, error, isLoading } = useUser();
+    const { user } = useContext(UserContext);
+    const router = useRouter()
 
-    if (isLoading) return <StyledLoading />;
-    if (error) return <div>{error.message}</div>;
+    const handleLogout = () => {
+        localStorage.clear();
+        router.push('/login')
+    }
 
     return (
         user && (
@@ -20,8 +23,7 @@ const TopNav = () => {
                     <a href="/create">Create</a>
                     <a href="/mylinks">My Links</a>
                     <a href="/account">Account</a>
-                    <a href="/api/auth/logout">Logout</a>
-                    <img src={user.picture} />
+                    <button onClick={handleLogout}>Logout</button>
                 </div>
 
                 <style jsx>{`

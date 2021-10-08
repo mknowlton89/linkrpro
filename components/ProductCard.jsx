@@ -6,7 +6,7 @@ const ProductCard = () => {
         <div>
             <h1>Sample Product</h1>
             <h2>$4.99/month</h2>
-            <StyledLink href="/">Try it Free</StyledLink>
+            <StyledLink href="/signup">Try it Free</StyledLink>
         </div>
     )
 }

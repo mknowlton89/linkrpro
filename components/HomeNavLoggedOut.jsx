@@ -2,12 +2,11 @@ import React from 'react'
 import { useUser } from '@auth0/nextjs-auth0'
 import { StyledButton, StyledLink, StyledLoading, StyledSecondaryLink } from '../styles/StyledComponents';
 import Button from './Button';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const HomeNavLoggedOut = () => {
-    const { user, error, isLoading } = useUser();
-
-    if (isLoading) return <StyledLoading />;
-    if (error) return <div>{error.message}</div>;
+    const { user } = useContext(UserContext);
 
     return (
         <div className="top-nav-wrapper">
@@ -16,7 +15,7 @@ const HomeNavLoggedOut = () => {
 
             </div>
             <div className="profile-wrapper">
-                <StyledSecondaryLink className="secondary" href="/api/auth/login">Login</StyledSecondaryLink>
+                <StyledSecondaryLink className="secondary" href="/login">Login</StyledSecondaryLink>
                 <StyledLink className="primary" href="/signup">Try it Free</StyledLink>
             </div>
 

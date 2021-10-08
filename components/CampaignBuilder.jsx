@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useUser } from '@auth0/nextjs-auth0'
 import { HelperText, PageContentWrapper, StyledLoading } from '../styles/StyledComponents'
 import Button from './Button';
 import TextInput from './TextInput'
 import API from '../utils/API'
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 const CampaignBuilder = () => {
-    const { user, error, isLoading } = useUser();
+    const { user } = useContext(UserContext);
     const [optionalFields, setOptionalFields] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [generatedLink, setGeneratedLink] = useState('');
@@ -33,13 +34,12 @@ const CampaignBuilder = () => {
     }
 
     const saveUtmParameters = () => {
-        //TODO: Update the API.createUtmParameter method and endpoint to use a switch case rather than multiple endpoints.
         for (const parameter in linkInputs) {
             if (!linkInputs[parameter]) {
                 return;
             }
             if (!utmParameters[parameter].includes(linkInputs[parameter])) {
-                API.createUtmParameter(parameter, linkInputs[parameter], user.sub)
+                API.createUtmParameter(parameter, linkInputs[parameter], user._id)
             } else {
                 console.log("Already in DB", parameter)
             };
@@ -47,7 +47,7 @@ const CampaignBuilder = () => {
     }
 
     const saveLink = (link) => {
-        API.createNewLink(link, user.sub)
+        API.createNewLink(link, user._id)
         saveUtmParameters()
     };
 
@@ -94,7 +94,7 @@ const CampaignBuilder = () => {
             ]
 
             utmParameterOptions.forEach((parameter) => {
-                API.getUtmParameters(user.sub, parameter)
+                API.getUtmParameters(user._id, parameter)
                     .then((res) => {
                         setUtmParameters(prevState => {
                             return {
@@ -107,9 +107,6 @@ const CampaignBuilder = () => {
             })
         }
     }, [user]);
-
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>{error.message}</div>;
 
     return (
         user && (
