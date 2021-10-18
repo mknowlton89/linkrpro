@@ -25,7 +25,7 @@ export const StyledInput = styled.input`
     margin: 30px 0px 0px 0px;
     font-size: 18px;
     color: black;
-    width: 100%;
+    ${'' /* width: 100%; */}
     background-color: white;
 
     :focus {

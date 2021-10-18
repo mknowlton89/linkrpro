@@ -48,4 +48,7 @@ export default {
             }
         });
     },
+    paymentIntent: function () {
+        return axios.post("api/payment/payment-intent", {})
+    },
 }

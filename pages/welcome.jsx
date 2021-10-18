@@ -10,6 +10,12 @@ export const welcome = () => {
 
     let authToken;
 
+    const handlePaymentIntent = () => {
+        API.paymentIntent()
+            .then((res) => console.log(res))
+            .catch((err => console.log(err)))
+    }
+
     useEffect(() => {
         if (!user) {
 
@@ -40,6 +46,7 @@ export const welcome = () => {
         {user ?
             <div>
                 <h1>Welcome, {user.email}</h1>
+                <button onClick={handlePaymentIntent}>Subscribe</button>
             </div>
         : <h2>Loading...</h2>}
         </div>

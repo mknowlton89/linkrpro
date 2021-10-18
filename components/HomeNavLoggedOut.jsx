@@ -1,5 +1,4 @@
 import React from 'react'
-import { useUser } from '@auth0/nextjs-auth0'
 import { StyledButton, StyledLink, StyledLoading, StyledSecondaryLink } from '../styles/StyledComponents';
 import Button from './Button';
 import { useContext } from 'react';
