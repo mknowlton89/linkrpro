@@ -1,56 +1,35 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router'
-import { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
-import API from '../utils/API';
+import React from 'react'
+import { createCheckoutSession } from 'next-stripe/client'
+import { loadStripe } from '@stripe/stripe-js'
 
-export const welcome = () => {
-    const { user, setUser } = useContext(UserContext);
-    const router = useRouter()
+const welcome = () => {
 
-    let authToken;
+  const handleClick = async () => {
+    const session = await createCheckoutSession({
+      success_url: 'http://localhost:3000/create',
+      cancel_url: window.location.href,
+      line_items: [{ price: 'price_1Jov4iA2NnxEX769e78UA5VE', quantity: 1 }],
+      payment_method_types: ['card'],
+      mode: 'subscription'
+    })
 
-    const handlePaymentIntent = () => {
-        API.paymentIntent()
-            .then((res) => console.log(res))
-            .catch((err => console.log(err)))
+    const stripe = await loadStripe(process.env.STRIPE_PUBLIC_TEST_KEY);
+
+    console.log(stripe);
+
+    if (stripe) {
+      stripe.redirectToCheckout({sessionId: session.id});
     }
 
-    useEffect(() => {
-        if (!user) {
+  }
 
-            if (typeof window !== 'undefined') {
-                authToken = localStorage.getItem('authToken');
-            };
-
-            if (!authToken) {
-                router.push('/login')
-            };
-
-            API.authorizeUser(authToken)
-                .then((res) => {
-                    setUser({
-                        _id: res.data.user.userId,
-                        email: res.data.user.email,
-                        currentToken: authToken
-                    })
-                })
-                .catch((err) => {
-                    router.push('/login')
-                })
-        }
-    }, [user])
-
-    return (
-        <div>
-        {user ?
-            <div>
-                <h1>Welcome, {user.email}</h1>
-                <button onClick={handlePaymentIntent}>Subscribe</button>
-            </div>
-        : <h2>Loading...</h2>}
-        </div>
-    )
+  return (
+    <div>
+      <h1>Sample Product</h1>
+      <h3>$10.00/Month</h3>
+      <button onClick={handleClick}>Try For Free</button>
+    </div>
+  )
 }
 
 export default welcome
