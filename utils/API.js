@@ -17,7 +17,12 @@ export default {
     },
     createNewUser: function (newUser) {
             return axios.post("/api/user", newUser);
-          },
+    },
+    createCheckoutSession: function (lookup_key) {
+        return axios.post('/api/payment/create-checkout-session', {
+            lookup_key: lookup_key
+        })
+    },
     createUtmParameter: function (parameter, utmParameter, user) {
         return axios.post(`/api/utm-parameters/create-all`, {
             parameter: parameter,
