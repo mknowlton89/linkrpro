@@ -5,6 +5,7 @@ import { loadStripe } from '@stripe/stripe-js'
 const welcome = () => {
 
   const handleClick = async () => {
+    
     const session = await createCheckoutSession({
       success_url: 'http://localhost:3000/create',
       cancel_url: window.location.href,

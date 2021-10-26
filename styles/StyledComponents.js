@@ -22,10 +22,12 @@ export const StyledInput = styled.input`
     height: 55px;
     border: 1px solid;
     border-color: ${props => props.error ? "tomato" : "black"};
-    margin: 30px 0px 0px 0px;
+    margin: 20px 0px 0px 0px;
     font-size: 18px;
     color: black;
-    ${'' /* width: 100%; */}
+    width: 100%;
+    box-sizing: border-box;
+    padding-left:25px;
     background-color: white;
 
     :focus {
@@ -34,12 +36,12 @@ export const StyledInput = styled.input`
 
     ::placeholder {
         color: black;
-        padding-left: 25px;
+        ${'' /* padding-left: 25px; */}
     }
 
-    ::input {
-        padding-left: 25px;
-    }
+    ${'' /* ::input {
+        margin-left: 25px;
+    } */}
 `
 
 export const StyledSelect = styled.select`

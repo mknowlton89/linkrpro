@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+:root {
+    --light-green: #84A59D;
+}

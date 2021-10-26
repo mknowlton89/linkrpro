@@ -8,6 +8,8 @@ import API from '../utils/API';
 const account = () => {
     const { user, setUser } = useContext(UserContext);
 
+
+
     let authToken;
 
     useEffect(() => {
