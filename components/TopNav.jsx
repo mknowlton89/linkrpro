@@ -9,8 +9,6 @@ const TopNav = () => {
 
     const handleLogout = () => {
         localStorage.clear();
-        // router.push('/login')
-        // console.log(user)
         router.reload()
     }
 
@@ -65,6 +63,8 @@ const TopNav = () => {
                     font-size: 25px;
                     font-weight: bold;
                 }
+
+                
 
             `}</style>
             </div>

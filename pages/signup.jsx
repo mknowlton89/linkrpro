@@ -78,27 +78,6 @@ const signup = () => {
 
     return (
         <>
-            {/* <FlexCentered>
-                <div className="signup-form">
-                    <h1>Start Your 7 Day Free Trial</h1>
-
-                    <StyledInput
-                        type="text"
-                        placeholder="Enter your Email"
-                        onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
-                    <StyledInput
-                        type="password"
-                        onChange={(e) => handleInputChange(e.target.value, 'password')}
-                        placeholder="Enter your password between 6 and 50 characters" />
-                    <StyledInput
-                        type="password"
-                        placeholder="Confirm your password"
-                        onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
-                    {error && <p className="error">Please ensure you entered a valid email.</p>}
-                    <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
-                </div>
-            </FlexCentered> */}
-
             <div className="page-wrapper">
                 <div className="signup-form">
                     <h1>Start Your 7 Day Free Trial</h1>
@@ -108,6 +87,7 @@ const signup = () => {
                         onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
                     <StyledInput
                         type="password"
+                        className="pw-large"
                         onChange={(e) => handleInputChange(e.target.value, 'password')}
                         placeholder="Enter your password between 6 and 50 characters" />
                     <StyledInput
@@ -147,6 +127,35 @@ const signup = () => {
                 color: tomato;
                 font-size: 18px;
                 text-align: left;
+            }
+
+            @media only screen and (max-width: 1100px) {
+                .page-wrapper {
+                    justify-content: center;
+                }
+
+                .left-third {
+                    display: none;
+                }
+            }
+
+            @media only screen and (max-width: 975px) {
+                .signup-form {
+                    width: 50%;
+                }
+            }
+
+            @media only screen and (max-width: 800px) {
+                .signup-form {
+                    width: 70%;
+                }
+            }
+
+            @media only screen and (max-width: 550px) {
+                .signup-form {
+                    width: 100%;
+                    margin: 20px;
+                }
             }
 
             `}</style>

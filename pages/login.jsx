@@ -105,6 +105,35 @@ const login = () => {
                 width: 60%;
             }
 
+            @media only screen and (max-width: 1100px) {
+                .page-wrapper {
+                    justify-content: center;
+                }
+
+                .left-third {
+                    display: none;
+                }
+            }
+
+            @media only screen and (max-width: 800px) {
+                .signup-form {
+                    width: 70%;
+                }
+            }
+
+            @media only screen and (max-width: 480px) {
+                .signup-form {
+                    width: 90%;
+                }
+            }
+
+            @media only screen and (max-width: 400px) {
+                .signup-form {
+                    width: 100%;
+                    margin: 20px;
+                }
+            }
+
             `}</style>
         </>
     )

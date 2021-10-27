@@ -23,12 +23,13 @@ export const StyledInput = styled.input`
     border: 1px solid;
     border-color: ${props => props.error ? "tomato" : "black"};
     margin: 20px 0px 0px 0px;
-    font-size: 18px;
+    font-size: 16px;
     color: black;
     width: 100%;
     box-sizing: border-box;
     padding-left:25px;
     background-color: white;
+    word-wrap: normal;
 
     :focus {
         outline: none;
@@ -39,9 +40,13 @@ export const StyledInput = styled.input`
         ${'' /* padding-left: 25px; */}
     }
 
-    ${'' /* ::input {
-        margin-left: 25px;
-    } */}
+    @media only screen and (max-width: 975px) {
+        font-size: 15px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        font-size: 13px;
+    }
 `
 
 export const StyledSelect = styled.select`
