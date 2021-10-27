@@ -14,6 +14,8 @@ const signup = () => {
     const { user, setUser } = useContext(UserContext);
     const router = useRouter()
 
+    let authToken;
+
     const handleSubmit = () => {
         API.createNewUser(newUserData)
             .then((res) => {
@@ -42,16 +44,41 @@ const signup = () => {
     }, [newUserData, passwordsMatch])
 
     useEffect(() => {
-        if (newUserData.passwordConfirmation === newUserData.password){
+        if (newUserData.passwordConfirmation === newUserData.password) {
             setPasswordsMatch(true);
         } else {
             setPasswordsMatch(false);
         }
     }, [newUserData])
 
+    useEffect(() => {
+        if (!user) {
+
+            if (typeof window !== 'undefined') {
+                authToken = localStorage.getItem('authToken');
+            };
+
+            if (authToken) {
+                API.authorizeUser(authToken)
+                    .then((res) => {
+                        setUser({
+                            _id: res.data.user.userId,
+                            email: res.data.user.email,
+                            currentToken: authToken
+                        })
+                    })
+                    .catch((err) => {})
+            }
+        }
+
+        if (user) {
+            router.push('/create')
+        }
+    }, [user])
+
     return (
         <>
-            <FlexCentered>
+            {/* <FlexCentered>
                 <div className="signup-form">
                     <h1>Start Your 7 Day Free Trial</h1>
 
@@ -70,15 +97,50 @@ const signup = () => {
                     {error && <p className="error">Please ensure you entered a valid email.</p>}
                     <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
                 </div>
-            </FlexCentered>
+            </FlexCentered> */}
+
+            <div className="page-wrapper">
+                <div className="signup-form">
+                    <h1>Start Your 7 Day Free Trial</h1>
+                    <StyledInput
+                        type="text"
+                        placeholder="Enter your Email"
+                        onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
+                    <StyledInput
+                        type="password"
+                        onChange={(e) => handleInputChange(e.target.value, 'password')}
+                        placeholder="Enter your password between 6 and 50 characters" />
+                    <StyledInput
+                        type="password"
+                        placeholder="Confirm your password"
+                        onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
+                    {error && <p className="error">Please ensure you entered a valid email.</p>}
+                    <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
+                </div>
+                <div className="left-third"></div>
+            </div>
 
             <style jsx>{`
 
+            .page-wrapper {
+                display: flex;
+                flex-direction: row;
+                min-height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
             .signup-form {
                 display: flex;
                 flex-direction: column;
-                width: 60%;
+                width: 40%;
                 text-align: center;
+                justify-content: center;
+                margin: 50px;
+            }
+
+            .left-third {
+                background-color: var(--light-green);
+                width: 60%;
             }
 
             .error {

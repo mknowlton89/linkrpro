@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { FlexCentered,  FlexColumnDiv, StyledInput} from '../styles/StyledComponents'
+import { StyledInput} from '../styles/StyledComponents'
 import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
@@ -8,8 +8,11 @@ import { UserContext } from '../context/UserContext';
 
 const login = () => {
     const [userLoginData, setUserLoginData] = useState({});
-    const { setUser } = useContext(UserContext);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const { user, setUser } = useContext(UserContext);
     const router = useRouter()
+
+    let authToken;
 
     const handleSubmit = () => {
         API.loginUser(userLoginData)
@@ -33,6 +36,41 @@ const login = () => {
         setUserLoginData({ ...userLoginData, [fieldName]: input })
     }
 
+    useEffect(() => {
+        if (userLoginData.email && userLoginData.password) {
+            setIsButtonDisabled(false);
+        }
+    }, [userLoginData])
+
+    useEffect(() => {
+        if (!user) {
+
+            if (typeof window !== 'undefined') {
+                authToken = localStorage.getItem('authToken');
+            };
+
+            if (!authToken) {
+                router.push('/login')
+            };
+
+            API.authorizeUser(authToken)
+                .then((res) => {
+                    setUser({
+                        _id: res.data.user.userId,
+                        email: res.data.user.email,
+                        currentToken: authToken
+                    })
+                })
+                .catch((err) => {
+                    router.push('/login')
+                })
+        }
+
+        if (user) {
+            router.push('/create')
+        }
+    }, [user])
+
     return (
         <>
             <div className="page-wrapper">
@@ -40,7 +78,7 @@ const login = () => {
                     <h1>Login To Your Account</h1>
                     <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
                     <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
-                    <Button onClick={handleSubmit} primary>Login</Button>
+                    <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
                 </div>
                 <div className="left-third"></div>
             </div>

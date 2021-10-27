@@ -9,7 +9,9 @@ const TopNav = () => {
 
     const handleLogout = () => {
         localStorage.clear();
-        router.push('/login')
+        // router.push('/login')
+        // console.log(user)
+        router.reload()
     }
 
     return (
