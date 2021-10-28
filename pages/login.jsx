@@ -80,7 +80,7 @@ const login = () => {
                 <div className="right-third">
                     <div className="signup-form">
                         <div className="logo-wrapper">
-                            <a href="/" className="logo">LinkrPro</a>
+                            <a href="/" className="logo">Paramly</a>
                         </div>
                         <div className="form-wrapper">
                             <h1 className="hr">Login To Your Account</h1>
@@ -93,8 +93,6 @@ const login = () => {
                         </div>
                     </div>
                 </div>
-                {/* <div className="left-third">
-                </div> */}
             </div>
 
             <style jsx>{`

@@ -67,7 +67,7 @@ const signup = () => {
                             currentToken: authToken
                         })
                     })
-                    .catch((err) => {})
+                    .catch((err) => { })
             }
         }
 
@@ -79,25 +79,37 @@ const signup = () => {
     return (
         <>
             <div className="page-wrapper">
-                <div className="signup-form">
-                    <h1>Start Your 7 Day Free Trial</h1>
-                    <StyledInput
-                        type="text"
-                        placeholder="Enter your Email"
-                        onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
-                    <StyledInput
-                        type="password"
-                        className="pw-large"
-                        onChange={(e) => handleInputChange(e.target.value, 'password')}
-                        placeholder="Enter your password between 6 and 50 characters" />
-                    <StyledInput
-                        type="password"
-                        placeholder="Confirm your password"
-                        onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
-                    {error && <p className="error">Please ensure you entered a valid email.</p>}
-                    <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
-                </div>
                 <div className="left-third"></div>
+
+                <div className="right-third">
+                    <div className="signup-form">
+                        <div className="logo-wrapper">
+                            <a href="/" className="logo">Paramly</a>
+                        </div>
+                        <div className="form-wrapper">
+                            <h1 className="hr">Start Your Free 7 Day Trial</h1>
+                            <StyledInput
+                                type="text"
+                                placeholder="Enter your email"
+                                onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
+                            <StyledInput
+                                type="password"
+                                className="pw-large"
+                                onChange={(e) => handleInputChange(e.target.value, 'password')}
+                                placeholder="Create a password" />
+                            <StyledInput
+                                type="password"
+                                placeholder="Confirm your password"
+                                onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
+                            {error && <p className="error">Please ensure you entered a valid email.</p>}
+                            <p>Password must be between 6 and 50 characters.</p>
+                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
+                        </div>
+                            <div className="footer-wrapper">
+                                <a href="/" className="privacy-policy">Privacy Policy</a>
+                            </div>
+                    </div>
+            </div>
             </div>
 
             <style jsx>{`
@@ -112,24 +124,58 @@ const signup = () => {
             .signup-form {
                 display: flex;
                 flex-direction: column;
-                width: 40%;
-                text-align: center;
-                justify-content: center;
-                margin: 50px;
+                justify-content: space-between;
+                min-height: 100vh;
+                max-width: 500px;
+                box-sizing: border-box;
             }
 
-            .left-third {
-                background-color: var(--light-green);
-                width: 60%;
+            .logo-wrapper, .form-wrapper, .footer-wrapper  {
+                padding: 50px;
             }
 
-            .error {
-                color: tomato;
-                font-size: 18px;
+            a {
+                text-decoration: none;
+                color: black;
                 text-align: left;
             }
 
-            @media only screen and (max-width: 1100px) {
+            a:hover {
+                cursor: pointer;
+            }
+
+            .logo {
+                font-size: 25px;
+                font-weight: bold;
+            }
+
+            .left-third {
+                background: rgb(208,214,255);
+                background: linear-gradient(143deg, rgba(208,214,255,0.6068802521008403) 0%, rgba(144,175,176,0.23433123249299714) 100%);
+                min-width: 35%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .right-third {
+                width: 65%;
+            }
+
+            .hr::before {
+                background-color: #6161e8;
+                display: block;
+                content: "";
+                height: 5px;
+                width: 34px;
+                margin-bottom: 20px;
+            }
+
+            button {
+                padding-top: 30px;
+            }
+
+            @media only screen and (max-width: 900px) {
                 .page-wrapper {
                     justify-content: center;
                 }
@@ -139,23 +185,16 @@ const signup = () => {
                 }
             }
 
-            @media only screen and (max-width: 975px) {
-                .signup-form {
-                    width: 50%;
-                }
-            }
-
-            @media only screen and (max-width: 800px) {
-                .signup-form {
-                    width: 70%;
-                }
-            }
-
-            @media only screen and (max-width: 550px) {
-                .signup-form {
+            @media only screen and (max-width: 755px) {
+                .right-third {
                     width: 100%;
-                    margin: 20px;
                 }
+            }
+
+            @media only screen and (max-width: 500px) {
+                .logo-wrapper, .form-wrapper, .footer-wrapper  {
+                padding: 30px;
+            }
             }
 
             `}</style>
