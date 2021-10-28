@@ -87,6 +87,10 @@ const login = () => {
                             <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
                             <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
                             <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
+                            <div className="login-helper">
+                                <a href="/signup">Don't have an account yet?</a>
+                                <a href="/login">Forget your username or password?</a>
+                            </div>
                         </div>
                         <div className="footer-wrapper">
                         <a href="/" className="privacy-policy">Privacy Policy</a>
@@ -127,7 +131,7 @@ const login = () => {
             }
 
             .logo {
-                font-size: 25px;
+                font-size: 35px;
                 font-weight: bold;
             }
 
@@ -155,6 +159,14 @@ const login = () => {
 
             button {
                 padding-top: 30px;
+            }
+
+            .login-helper {
+                padding-top: 8px;
+                text-decoration: underline;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
             }
 
             @media only screen and (max-width: 900px) {

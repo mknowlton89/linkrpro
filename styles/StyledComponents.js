@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const StyledButton = styled.button`
-        background: ${props => props.primary ? "navy" : "white"};
-        color: ${props => props.primary ? "white" : "navy"};
-        border: ${props => !props.primary ? "3px solid navy" : "none"};
+        background: ${props => props.primary ? "#3e3eaf" : "white"};
+        color: ${props => props.primary ? "white" : "#3e3eaf"};
+        border: ${props => !props.primary ? "3px solid #3e3eaf" : "none"};
         height: 55px;
         border-radius: 5px;
         font-size: 22px;

@@ -102,8 +102,13 @@ const signup = () => {
                                 placeholder="Confirm your password"
                                 onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
                             {error && <p className="error">Please ensure you entered a valid email.</p>}
-                            <p>Password must be between 6 and 50 characters.</p>
+                            <p className="password-hint">Password must be between 6 and 50 characters.</p>
                             <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
+                            <div className="login-helper">
+                                <p>Already a user?</p>
+                                <a href="/login">Click here to login.</a>
+
+                            </div>
                         </div>
                             <div className="footer-wrapper">
                                 <a href="/" className="privacy-policy">Privacy Policy</a>
@@ -145,7 +150,7 @@ const signup = () => {
             }
 
             .logo {
-                font-size: 25px;
+                font-size: 35px;
                 font-weight: bold;
             }
 
@@ -173,6 +178,18 @@ const signup = () => {
 
             button {
                 padding-top: 30px;
+            }
+
+            .login-helper {
+                padding-top: 8px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .login-helper a {
+                padding-left: 5px;
+                text-decoration: underline;
             }
 
             @media only screen and (max-width: 900px) {
