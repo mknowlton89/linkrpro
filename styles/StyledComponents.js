@@ -122,6 +122,7 @@ export const PageContentWrapper = styled.div`
     min-height: 100vh;
     padding: 20px 35px;
     background-color: #f3f3f3;
+    width: 100%;
 `
 
 export const HelperText = styled.p`
