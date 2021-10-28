@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { UserContext } from '../context/UserContext';
-import LinkHistory from '../components/LinkHistory'
-import LoginRequired from '../components/LoginRequired'
-import TopNav from '../components/TopNav'
+import LinkHistory from '../components/LinkHistory';
+import TopNav from '../components/TopNav';
 import API from '../utils/API';
+import { useRouter } from 'next/router';
 
 export const mylinks = () => {
     const { user, setUser } = useContext(UserContext);
+    const router = useRouter();
 
     let authToken;
 
@@ -35,13 +36,21 @@ export const mylinks = () => {
         }
     }, [user])
 
+    // if (user) {
+    //     return
+    //     <>
+    //         <TopNav />
+    //         <LinkHistory />
+    //     </>
+    // }
+
     return (
         user ? (
         <>
             <TopNav />
             <LinkHistory />
         </>
-        ) : <LoginRequired />
+        ) : <h2>Loading...</h2>
     )
 }
 

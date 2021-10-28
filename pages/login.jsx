@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import Image from 'next/image'
 
 const login = () => {
     const [userLoginData, setUserLoginData] = useState({});
@@ -74,13 +75,26 @@ const login = () => {
     return (
         <>
             <div className="page-wrapper">
-                <div className="signup-form">
-                    <h1>Login To Your Account</h1>
-                    <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
-                    <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
-                    <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
+                <div className="left-third">
                 </div>
-                <div className="left-third"></div>
+                <div className="right-third">
+                    <div className="signup-form">
+                        <div className="logo-wrapper">
+                            <a href="/" className="logo">LinkrPro</a>
+                        </div>
+                        <div className="form-wrapper">
+                            <h1 className="hr">Login To Your Account</h1>
+                            <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
+                            <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
+                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
+                        </div>
+                        <div className="footer-wrapper">
+                        <a href="/" className="privacy-policy">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+                {/* <div className="left-third">
+                </div> */}
             </div>
 
             <style jsx>{`
@@ -94,18 +108,58 @@ const login = () => {
             .signup-form {
                 display: flex;
                 flex-direction: column;
-                width: 40%;
-                text-align: center;
-                justify-content: center;
-                margin: 50px;
+                justify-content: space-between;
+                min-height: 100vh;
+                max-width: 500px;
+                box-sizing: border-box;
+            }
+
+            .logo-wrapper, .form-wrapper, .footer-wrapper  {
+                padding: 50px;
+            }
+
+            a {
+                text-decoration: none;
+                color: black;
+                text-align: left;
+            }
+
+            a:hover {
+                cursor: pointer;
+            }
+
+            .logo {
+                font-size: 25px;
+                font-weight: bold;
             }
 
             .left-third {
-                background-color: var(--light-green);
-                width: 60%;
+                background: rgb(208,214,255);
+                background: linear-gradient(143deg, rgba(208,214,255,0.6068802521008403) 0%, rgba(144,175,176,0.23433123249299714) 100%);
+                min-width: 35%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
-            @media only screen and (max-width: 1100px) {
+            .right-third {
+                width: 65%;
+            }
+
+            .hr::before {
+                background-color: #6161e8;
+                display: block;
+                content: "";
+                height: 5px;
+                width: 34px;
+                margin-bottom: 20px;
+            }
+
+            button {
+                padding-top: 30px;
+            }
+
+            @media only screen and (max-width: 900px) {
                 .page-wrapper {
                     justify-content: center;
                 }
@@ -115,23 +169,16 @@ const login = () => {
                 }
             }
 
-            @media only screen and (max-width: 800px) {
-                .signup-form {
-                    width: 70%;
-                }
-            }
-
-            @media only screen and (max-width: 480px) {
-                .signup-form {
-                    width: 90%;
-                }
-            }
-
-            @media only screen and (max-width: 400px) {
-                .signup-form {
+            @media only screen and (max-width: 755px) {
+                .right-third {
                     width: 100%;
-                    margin: 20px;
                 }
+            }
+
+            @media only screen and (max-width: 500px) {
+                .logo-wrapper, .form-wrapper, .footer-wrapper  {
+                padding: 30px;
+            }
             }
 
             `}</style>
