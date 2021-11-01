@@ -4,10 +4,12 @@ import { StyledLoading } from '../styles/StyledComponents';
 import LoginRequired from '../components/LoginRequired';
 import { UserContext } from '../context/UserContext';
 import API from '../utils/API';
+import SideNav from '../components/SideNav';
+import { useRouter } from 'next/router'
 
 const account = () => {
     const { user, setUser } = useContext(UserContext);
-
+    const router = useRouter()
 
 
     let authToken;
@@ -39,15 +41,21 @@ const account = () => {
 
     return (
         user ? (
-            <div>
-                <TopNav />
-                {/* <img src={user.picture} alt={user.name} /> */}
-                {/* <h2>{user.name}</h2> */}
+            <>
+              <div className="page-wrapper">
+                <SideNav />
                 <p>{user.email}</p>
-                {/* <p>{user.sub}</p> */}
-            </div>
-        ) :
-        <h2>Loading...</h2>
+              </div>
+
+              <style jsx>{`
+                .page-wrapper {
+                  display: flex;
+
+                }
+              `}</style>
+            </>
+          ) :
+            <h2>Loading...</h2>
     )
 }
 

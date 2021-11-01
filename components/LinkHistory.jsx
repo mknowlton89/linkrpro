@@ -4,6 +4,7 @@ import LoginRequired from '../components/LoginRequired'
 import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import { PageContentWrapper } from '../styles/StyledComponents';
 
 const LinkHistory = () => {
     const [linkHistory, setLinkHistory] = useState([]);
@@ -21,16 +22,15 @@ const LinkHistory = () => {
 
     return (
         <>
-            <div className="history-table">
-                <div className="table-title">
+            <PageContentWrapper>
                     <h1>Your Link History</h1>
-                </div>
-                {linkHistory.map((link) => {
-                    return <div className="table-row" key={link._id}>
-                        <p>{link.link}</p>
+                    <div className="table-row">
+                        {linkHistory.map((link) => {
+                            return <p key={link._id}>{link.link}</p>
+                        })}
                     </div>
-                })}
-            </div>
+
+            </PageContentWrapper>
 
             <style jsx>{`
                 .history-table {
@@ -48,10 +48,14 @@ const LinkHistory = () => {
                     padding-left: 20px;
                 }
 
-                .table-row {
-                    padding-left: 20px;
+                .table-row p {
+                    padding: 12px;
                     font-size: 18px;
-                    background-color: #fdfdfd;
+                    margin: 0;
+                }
+
+                .table-row p:hover {
+                    background-color: #fdfdfd
                 }
 
             `}</style>

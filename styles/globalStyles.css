@@ -13,3 +13,7 @@ body {
 :root {
     --light-green: #84A59D;
 }
+
+h1 {
+    font-size: 30px;
+}

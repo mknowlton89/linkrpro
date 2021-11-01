@@ -235,6 +235,7 @@ const CampaignBuilder = () => {
                 <style jsx>{`
             h1 {
                 margin-bottom: 0px;
+                margin-top: 27px;
             }
 
             h5 {

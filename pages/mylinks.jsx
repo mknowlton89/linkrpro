@@ -4,6 +4,7 @@ import LinkHistory from '../components/LinkHistory';
 import TopNav from '../components/TopNav';
 import API from '../utils/API';
 import { useRouter } from 'next/router';
+import SideNav from '../components/SideNav';
 
 export const mylinks = () => {
     const { user, setUser } = useContext(UserContext);
@@ -36,21 +37,23 @@ export const mylinks = () => {
         }
     }, [user])
 
-    // if (user) {
-    //     return
-    //     <>
-    //         <TopNav />
-    //         <LinkHistory />
-    //     </>
-    // }
-
     return (
         user ? (
-        <>
-            <TopNav />
-            <LinkHistory />
-        </>
-        ) : <h2>Loading...</h2>
+            <>
+              <div className="page-wrapper">
+                <SideNav />
+                <LinkHistory />
+              </div>
+
+              <style jsx>{`
+                .page-wrapper {
+                  display: flex;
+
+                }
+              `}</style>
+            </>
+          ) :
+            <h2>Loading...</h2>
     )
 }
 

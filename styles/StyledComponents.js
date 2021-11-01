@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const StyledButton = styled.button`
-        background: ${props => props.primary ? "#3e3eaf" : "white"};
-        color: ${props => props.primary ? "white" : "#3e3eaf"};
-        border: ${props => !props.primary ? "3px solid #3e3eaf" : "none"};
+        background: ${props => props.primary ? "#8980F5" : "white"};
+        color: ${props => props.primary ? "white" : "#8980F5"};
+        border: ${props => !props.primary ? "3px solid #8980F5" : "none"};
         height: 55px;
         border-radius: 5px;
         font-size: 22px;
@@ -121,7 +121,9 @@ export const PageContentWrapper = styled.div`
     flex-direction: column;
     min-height: 100vh;
     padding: 20px 35px;
-    background-color: #f3f3f3;
+    background-color: #fafafa;
+    width: 100%;
+    box-sizing: border-box;
 `
 
 export const HelperText = styled.p`
