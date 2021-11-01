@@ -123,6 +123,7 @@ export const PageContentWrapper = styled.div`
     padding: 20px 35px;
     background-color: #f3f3f3;
     width: 100%;
+    box-sizing: border-box;
 `
 
 export const HelperText = styled.p`

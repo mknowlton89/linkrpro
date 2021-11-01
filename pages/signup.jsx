@@ -84,7 +84,7 @@ const signup = () => {
                 <div className="right-third">
                     <div className="signup-form">
                         <div className="logo-wrapper">
-                            <a href="/" className="logo">Paramly</a>
+                            <a href="/" className="logo">Sourcely</a>
                         </div>
                         <div className="form-wrapper">
                             <h1 className="hr">Start Your Free 7 Day Trial</h1>

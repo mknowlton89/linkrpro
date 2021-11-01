@@ -5,7 +5,6 @@ import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
-import Image from 'next/image'
 
 const login = () => {
     const [userLoginData, setUserLoginData] = useState({});
@@ -80,7 +79,7 @@ const login = () => {
                 <div className="right-third">
                     <div className="signup-form">
                         <div className="logo-wrapper">
-                            <a href="/" className="logo">Paramly</a>
+                            <a href="/" className="logo">Sourcely</a>
                         </div>
                         <div className="form-wrapper">
                             <h1 className="hr">Login To Your Account</h1>
