@@ -56,7 +56,6 @@ const SideNav = () => {
                     </div>
                 </div>
                 <div className="bottom-content">
-                    {/* <Button onClick={() => handleLogout()}> */}
                         <div className="link-group bottom" onClick={() => handleLogout()}>
                             <Image
                                 src="/icons/sign-in.png"
@@ -66,7 +65,6 @@ const SideNav = () => {
                             />
                             <a href="/account">Sign Out</a>
                         </div>
-                    {/* </Button> */}
                 </div>
             </div>
 
@@ -74,11 +72,11 @@ const SideNav = () => {
                 .side-nav-wrapper {
                     min-height: 100vh;
                     width: 300px;
-                    background: rgb(108,108,235);
-                    background: linear-gradient(143deg, rgba(108,108,235,1) 0%, rgba(62,62,175,1) 100%);
+                    background: rgb(59,169,156);
+background: linear-gradient(143deg, rgba(59,169,156,1) 0%, rgba(105,209,197,1) 100%);
                     padding: 20px 35px;
                     box-sizing: border-box;
-                    border-radius: 0px 5px 5px 0px;
+                    border-radius: 0px 5px 5npx 0px;
                 }
 
                 .side-nav-wrapper a {
@@ -94,7 +92,7 @@ const SideNav = () => {
                 }
 
                 h1 {
-                    color: #d4d4ff;
+                    color: #e6e6e6;
                 }
 
                 .side-nav-content {
@@ -104,15 +102,12 @@ const SideNav = () => {
                     height: 100%;
                 }
 
-                .top-content, .links{
+                .top-content, .links, .bottom-content{
                     display: flex;
                     flex-direction: column;
                 }
 
-                .bottom-content {
-                    display: flex;
-                    flex-direction: column;
-                }
+
 
                 .links {
                     padding-top: 40px;
@@ -126,13 +121,11 @@ const SideNav = () => {
                 }
 
                 .link-group:hover {
-                    background-color: #6c6ceb;
+                    background-color: #69D1C5;
                     border-radius: 10px;
                 }
 
-                .bottom {
-                    justify-content: center;
-                }
+
             `}</style>
         </div>
     )
