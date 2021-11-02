@@ -37,6 +37,29 @@ const UserSchema = new mongoose.Schema(
       minlength: [6, 'Password must be between 6 and 50 characters'],
       maxlength: [50, 'Password must be between 6 and 50 characters'],
       required: [true, 'A password is required']
+    },
+    ccOnFile: {
+      type: Boolean,
+      default: false,
+      required: [true, '']
+    },
+    plan: {
+      type: String,
+      default: 'None',
+      required: true,
+    },
+    planPrice: {
+      type: String,
+      default: "None",
+      required: true,
+    },
+    accountStatus: {
+      type: "String",
+      default: "Trial",
+      required: true,
+    },
+    signUpDate: {
+      type: Date,
     }
     // openingTime: {
     //   type: String,

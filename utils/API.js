@@ -17,6 +17,11 @@ export default {
     },
     createNewUser: function (newUser) {
             return axios.post("/api/user", newUser);
+            // return axios.post('/api/user', {
+            //     email: newUser.email,
+            //     password: newUser.password,
+            //     signUpDate: newUser.signUpDate,
+            // })
     },
     createCheckoutSession: function (lookup_key) {
         return axios.post('/api/payment/create-checkout-session', {
@@ -56,4 +61,17 @@ export default {
     paymentIntent: function () {
         return axios.post("api/payment/payment-intent", {})
     },
+    updateUser: function (user, planName, planPrice) {
+            return axios.put("/api/user", {
+                user: user,
+                planName: planName,
+                planPrice: planPrice,
+            });
+    },
+    updateCreditCardOnFile: function (user, ccOnFile) {
+        return axios.put('/api/user-add-cc', {
+            user: user,
+            ccOnFile: ccOnFile,
+        })
+    }
 }

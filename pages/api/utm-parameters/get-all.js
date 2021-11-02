@@ -11,8 +11,8 @@ export default async (req, res) => {
 
     await dbConnect()
 
-    console.log(req.query.parameter, 'get-all')
-    console.log(req.query.user)
+    // console.log(req.query.parameter, 'get-all')
+    // console.log(req.query.user)
 
     switch(req.query.parameter) {
         case 'campaignUrl':

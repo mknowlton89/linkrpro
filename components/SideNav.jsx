@@ -8,7 +8,6 @@ const SideNav = () => {
 
     const handleLogout = () => {
         localStorage.clear();
-        router.reload()
     }
 
     return (
@@ -63,7 +62,7 @@ const SideNav = () => {
                                 width={20}
                                 height={20}
                             />
-                            <a href="/account">Sign Out</a>
+                            <a href="/login">Sign Out</a>
                         </div>
                 </div>
             </div>
