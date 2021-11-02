@@ -16,12 +16,21 @@ const signup = () => {
 
     let authToken;
 
-    const handleSubmit = () => {
-        API.createNewUser(newUserData)
+    async function handleSubmit() {
+
+        let signUpDate = await setSignUpDate()
+
+        API.createNewUser({
+            email: newUserData.email,
+            password: newUserData.password,
+            signUpDate: signUpDate
+        })
             .then((res) => {
+                // console.log(res.data.data)
                 setUser({
                     _id: res.data.data._id,
                     email: res.data.data.email,
+                    ccOnFile: res.data.data.ccOnFile,
                     currentToken: res.data.token
                 })
 
@@ -35,6 +44,12 @@ const signup = () => {
 
     const handleInputChange = (input, fieldName) => {
         setNewUserData({ ...newUserData, [fieldName]: input })
+    }
+
+    async function setSignUpDate() {
+        let signUpDate = new Date().toString()
+
+        return signUpDate;
     }
 
     useEffect(() => {
@@ -74,17 +89,24 @@ const signup = () => {
         if (user) {
             router.push('/create')
         }
-    }, [user])
+    }, [])
+
+    console.log(newUserData)
 
     return (
         <>
             <div className="page-wrapper">
-                <div className="left-third"></div>
+                <div className="left-third">
+                        <div className="logo-wrapper">
+                            <a href="/" className="logo">Sourcely</a>
+                        </div>
+
+                </div>
 
                 <div className="right-third">
                     <div className="signup-form">
                         <div className="logo-wrapper">
-                            <a href="/" className="logo">Sourcely</a>
+                            {/* <a href="/" className="logo">Sourcely</a> */}
                         </div>
                         <div className="form-wrapper">
                             <h1 className="hr">Start Your Free 7 Day Trial</h1>
@@ -103,7 +125,7 @@ const signup = () => {
                                 onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
                             {error && <p className="error">Please ensure you entered a valid email.</p>}
                             <p className="password-hint">Password must be between 6 and 50 characters.</p>
-                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Create Your Account</Button>
+                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Step 2 - Choose Plan</Button>
                             <div className="login-helper">
                                 <p>Already a user?</p>
                                 <a href="/login">Click here to login.</a>
@@ -131,12 +153,25 @@ const signup = () => {
                 flex-direction: column;
                 justify-content: space-between;
                 min-height: 100vh;
-                max-width: 500px;
                 box-sizing: border-box;
             }
 
             .logo-wrapper, .form-wrapper, .footer-wrapper  {
                 padding: 50px;
+            }
+
+            .form-wrapper {
+                display: flex;
+                flex-direction: column;
+                width: 100%:
+                justify-content: center;
+                box-sizing: border-box;
+                padding: 0px 150px;
+            }
+
+            .footer-wrapper {
+                display: flex;
+                justify-content: flex-start;
             }
 
             a {
@@ -159,8 +194,9 @@ const signup = () => {
                 background: linear-gradient(143deg, rgba(208,214,255,0.6068802521008403) 0%, rgba(144,175,176,0.23433123249299714) 100%);
                 min-width: 35%;
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
             }
 
             .right-third {

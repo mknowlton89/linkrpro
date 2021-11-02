@@ -21,11 +21,8 @@ export default function create() {
               authToken = localStorage.getItem('authToken');
           };
 
-          if (!authToken) {
-              router.push('/login')
-          };
-
-          API.authorizeUser(authToken)
+          if (authToken) {
+            API.authorizeUser(authToken)
               .then((res) => {
                   setUser({
                       _id: res.data.user.userId,
@@ -36,7 +33,25 @@ export default function create() {
               .catch((err) => {
                   router.push('/login')
               })
+          } else {
+            router.push('/login')
+          }
       }
+  }, [user])
+
+  useEffect(() => {
+
+    if (user) {
+      if (typeof window !== 'undefined') {
+        const queryParams = new URLSearchParams(window.location.search);
+
+        if (queryParams.get('success')) {
+          API.updateCreditCardOnFile(user, true)
+        }
+      };
+
+    }
+
   }, [user])
 
   return (
