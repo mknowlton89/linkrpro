@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { FlexCentered, StyledInput } from '../styles/StyledComponents'
 import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 
 const signup = () => {
-    const [newUserData, setNewUserData] = useState({});
+    const [userData, setUserData] = useState({});
     const [error, setError] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [passwordsMatch, setPasswordsMatch] = useState(false);
@@ -16,54 +15,54 @@ const signup = () => {
 
     let authToken;
 
+    let resetToken;
+
     async function handleSubmit() {
 
-        let signUpDate = await setSignUpDate()
+            const queryParams = new URLSearchParams(window.location.search);
 
-        API.createNewUser({
-            email: newUserData.email,
-            password: newUserData.password,
-            signUpDate: signUpDate
-        })
-            .then((res) => {
-                setUser({
-                    _id: res.data.data._id,
-                    email: res.data.data.email,
-                    ccOnFile: res.data.data.ccOnFile,
-                    currentToken: res.data.token
+            resetToken = queryParams.get('token')
+
+            API.resetUserPassword(resetToken, userData.password)
+                .then((res) => {
+                    if (res.status === 200) {
+                        router.push('/login')
+                    }
                 })
-
-                window.localStorage.setItem('authToken', res.data.token);
-                if (res.status === 200) {
-                    router.push('/welcome')
-                }
-            })
-            .catch(err => setError(true))
+                .catch(err => setError(true))
     }
 
     const handleInputChange = (input, fieldName) => {
-        setNewUserData({ ...newUserData, [fieldName]: input })
-    }
-
-    async function setSignUpDate() {
-        let signUpDate = new Date().toString()
-
-        return signUpDate;
+        setUserData({ ...userData, [fieldName]: input })
     }
 
     useEffect(() => {
-        if (newUserData.email && (newUserData.password && newUserData.password.length >= 6) && passwordsMatch) {
+
+        if (typeof window !== 'undefined') {
+            const queryParams = new URLSearchParams(window.location.search);
+
+            if (queryParams.get('token')) {
+                resetToken = queryParams.get('token')
+              console.log(resetToken, "resetToken");
+            } else {
+                router.push('/login')
+            }
+          };
+    }, [])
+
+    useEffect(() => {
+        if ((userData.password && userData.password.length >= 6) && passwordsMatch) {
             setIsButtonDisabled(false);
         }
-    }, [newUserData, passwordsMatch])
+    }, [userData, passwordsMatch])
 
     useEffect(() => {
-        if (newUserData.passwordConfirmation === newUserData.password) {
+        if (userData.passwordConfirmation === userData.password) {
             setPasswordsMatch(true);
         } else {
             setPasswordsMatch(false);
         }
-    }, [newUserData])
+    }, [userData])
 
     useEffect(() => {
         if (!user) {
@@ -90,8 +89,6 @@ const signup = () => {
         }
     }, [])
 
-    console.log(newUserData)
-
     return (
         <>
             <div className="page-wrapper">
@@ -108,11 +105,7 @@ const signup = () => {
                             {/* <a href="/" className="logo">Sourcely</a> */}
                         </div>
                         <div className="form-wrapper">
-                            <h1 className="hr">Start Your Free 7 Day Trial</h1>
-                            <StyledInput
-                                type="text"
-                                placeholder="Enter your email"
-                                onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
+                            <h1 className="hr">Create a New Password</h1>
                             <StyledInput
                                 type="password"
                                 className="pw-large"
@@ -122,14 +115,9 @@ const signup = () => {
                                 type="password"
                                 placeholder="Confirm your password"
                                 onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
-                            {error && <p className="error">Please ensure you entered a valid email.</p>}
+                            {error && <p className="error">Something went wrong, please try again.</p>}
                             <p className="password-hint">Password must be between 6 and 50 characters.</p>
-                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Step 2 - Choose Plan</Button>
-                            <div className="login-helper">
-                                <p>Already a user?</p>
-                                <a href="/login">Click here to login.</a>
-
-                            </div>
+                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Save Password</Button>
                         </div>
                             <div className="footer-wrapper">
                                 <a href="/" className="privacy-policy">Privacy Policy</a>
