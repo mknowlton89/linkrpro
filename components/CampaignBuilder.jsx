@@ -64,7 +64,6 @@ const CampaignBuilder = () => {
     const copyToClipboard = () => {
         navigator.clipboard.writeText(generatedLink)
         setIsLinkCopied(true);
-
     }
 
     useEffect(() => {
@@ -107,13 +106,6 @@ const CampaignBuilder = () => {
             })
         }
     }, [user]);
-
-    useEffect(() => {
-        // Get the URL parameters, if success=true, set ccOnFile to true.
-
-    }, [])
-
-    console.log(user, "User")
 
     return (
             <>

@@ -37,21 +37,6 @@ const DashboardWrapper = ({children}) => {
         }
     }, [user])
 
-    useEffect(() => {
-
-      if (user) {
-        if (typeof window !== 'undefined') {
-          const queryParams = new URLSearchParams(window.location.search);
-
-          if (queryParams.get('success')) {
-            API.updateCreditCardOnFile(user, true)
-          }
-        };
-
-      }
-
-    }, [user])
-
     return (
       user ? (
         <>
@@ -67,7 +52,7 @@ const DashboardWrapper = ({children}) => {
           `}</style>
         </>
       ) :
-        <h2>Loading...</h2>
+        <div></div>
     )
   }
 

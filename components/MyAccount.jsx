@@ -3,13 +3,10 @@ import { PageContentWrapper } from '../styles/StyledComponents';
 
 const MyAccount = () => {
 
-
     return (
-        <>
-            <PageContentWrapper>
-                    <h1>My Account</h1>
-            </PageContentWrapper>
-        </>
+        <PageContentWrapper>
+            <h1>My Account</h1>
+        </PageContentWrapper>
     )
 }
 
