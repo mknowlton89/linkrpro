@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { createCheckoutSession } from 'next-stripe/client'
 import { loadStripe } from '@stripe/stripe-js'
-import { HelperText, StyledInput } from '../styles/StyledComponents'
 import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { useRouter } from 'next/router'
-import HELPER from '../utils/HELPER'
 import LoginLogoutWrapper from '../components/LoginLogoutWrapper'
 
 const welcome = () => {
