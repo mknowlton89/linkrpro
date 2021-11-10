@@ -1,11 +1,9 @@
 import React, { useEffect, useContext } from 'react'
-import TopNav from '../components/TopNav';
-import { StyledLoading } from '../styles/StyledComponents';
-import LoginRequired from '../components/LoginRequired';
 import { UserContext } from '../context/UserContext';
 import API from '../utils/API';
-import SideNav from '../components/SideNav';
 import { useRouter } from 'next/router'
+import DashboardWrapper from '../components/DashboardWrapper';
+import MyAccount from '../components/MyAccount';
 
 const account = () => {
     const { user, setUser } = useContext(UserContext);
@@ -40,22 +38,9 @@ const account = () => {
     }, [user])
 
     return (
-        user ? (
-            <>
-              <div className="page-wrapper">
-                <SideNav />
-                <p>{user.email}</p>
-              </div>
-
-              <style jsx>{`
-                .page-wrapper {
-                  display: flex;
-
-                }
-              `}</style>
-            </>
-          ) :
-            <h2>Loading...</h2>
+      <DashboardWrapper>
+        <MyAccount />
+      </DashboardWrapper>
     )
 }
 
