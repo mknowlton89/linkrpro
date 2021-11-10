@@ -8,16 +8,6 @@ var validateEmail = function(email) {
 
 const UserSchema = new mongoose.Schema(
   {
-    // firstName: {
-    //   type: String,
-    //   trim: true,
-    //   required: "firstName is required"
-    // },
-    // lastName: {
-    //   type: String,
-    //   trim: true,
-    //   required: "lastName is required"
-    // },
     email: {
       type: String,
       trim: true,
@@ -27,11 +17,6 @@ const UserSchema = new mongoose.Schema(
       validate: [validateEmail, 'Please fill a valid email address'],
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    // businessName: {
-    //   type: String,
-    //   unique: true,
-    //   trim: true
-    // },
     password: {
       type: String,
       minlength: [6, 'Password must be between 6 and 50 characters'],
@@ -60,19 +45,10 @@ const UserSchema = new mongoose.Schema(
     },
     signUpDate: {
       type: Date,
+    },
+    resetToken: {
+      type: String,
     }
-    // openingTime: {
-    //   type: String,
-    //   default: '08:00'
-    // },
-    // closingTime: {
-    //   type: String,
-    //   default: '18:00'
-    // },
-    // appointmentInterval: {
-    //   type: Number,
-    //   default: 30
-    // }
   });
 
   UserSchema.pre("save", function (next) {

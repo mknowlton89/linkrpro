@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { StyledInput} from '../styles/StyledComponents'
+import { StyledInput } from '../styles/StyledComponents'
 import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
@@ -15,21 +15,15 @@ const login = () => {
     let authToken;
 
     const handleSubmit = () => {
-        API.loginUser(userLoginData)
+        // Create a JWT that expires in 1 hour and give it the user's email address
+        API.generateResetToken(userLoginData.email)
             .then((res) => {
-                console.log(res)
-                setUser({
-                    _id: res.data.userId,
-                    email: res.data.email,
-                    currentToken: res.data.token
-                })
-
-                window.localStorage.setItem('authToken', res.data.token);
                 if (res.status === 200) {
-                    router.push('/create')
+                    // TODO: Queue an email that will allow someone to go to /reset w/ the url param that includes said JWT.
+                    // TODO: Give the user confirmation that we have sent an email
                 }
             })
-            .catch(err => console.log(err, "Error Finding User"))
+            .catch((err) => console.log(err))
     }
 
     const handleInputChange = (input, fieldName) => {
@@ -37,7 +31,7 @@ const login = () => {
     }
 
     useEffect(() => {
-        if (userLoginData.email && userLoginData.password) {
+        if (userLoginData.email) {
             setIsButtonDisabled(false);
         }
     }, [userLoginData])
@@ -49,21 +43,21 @@ const login = () => {
                 authToken = localStorage.getItem('authToken');
             };
 
-            if (!authToken) {
-                router.push('/login')
-            };
+            console.log(authToken)
 
-            API.authorizeUser(authToken)
-                .then((res) => {
-                    setUser({
-                        _id: res.data.user.userId,
-                        email: res.data.user.email,
-                        currentToken: authToken
+            if (authToken) {
+                API.authorizeUser(authToken)
+                    .then((res) => {
+                        setUser({
+                            _id: res.data.user.userId,
+                            email: res.data.user.email,
+                            currentToken: authToken
+                        })
                     })
-                })
-                .catch((err) => {
-                    router.push('/login')
-                })
+                    .catch((err) => {
+                        router.push('/login')
+                    })
+            };
         }
 
         if (user) {
@@ -82,17 +76,13 @@ const login = () => {
                             <a href="/" className="logo">Sourcely</a>
                         </div>
                         <div className="form-wrapper">
-                            <h1 className="hr">Login To Your Account</h1>
+                            <h1 className="hr">Reset Your Password</h1>
+                            <p>We'll send you a link to reset your password</p>
                             <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
-                            <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
-                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
-                            <div className="login-helper">
-                                <a href="/signup">Don't have an account yet?</a>
-                                <a href="/forgot">Forget your username or password?</a>
-                            </div>
+                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Reset Password</Button>
                         </div>
                         <div className="footer-wrapper">
-                        <a href="/" className="privacy-policy">Privacy Policy</a>
+                            <a href="/" className="privacy-policy">Privacy Policy</a>
                         </div>
                     </div>
                 </div>

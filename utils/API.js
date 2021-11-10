@@ -35,6 +35,13 @@ export default {
             user: user,
         })
     },
+    generateResetToken: function (userEmail) {
+        return axios.put('/api/forgot', {
+            params: {
+                userEmail: userEmail,
+            }
+        })
+    },
     getLinkHistoryById: function (userId) {
         return axios.get('/api/links/history', {
             params: {
@@ -60,6 +67,14 @@ export default {
     },
     paymentIntent: function () {
         return axios.post("api/payment/payment-intent", {})
+    },
+    resetUserPassword: function (resetToken, newPassword) {
+        return axios.put('/api/reset', {
+            params: {
+                resetToken: resetToken,
+                newPassword: newPassword,
+            }
+        })
     },
     updateUser: function (user, planName, planPrice) {
             return axios.put("/api/user", {
