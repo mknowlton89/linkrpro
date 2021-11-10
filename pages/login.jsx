@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import LoginLogoutWrapper from '../components/LoginLogoutWrapper'
+import { StyledInput } from '../styles/StyledComponents'
 import { useRouter } from 'next/router'
-import { StyledInput} from '../styles/StyledComponents'
 import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
@@ -73,78 +74,28 @@ const login = () => {
 
     return (
         <>
-            <div className="page-wrapper">
-                <div className="left-third">
-                </div>
-                <div className="right-third">
-                    <div className="signup-form">
-                        <div className="logo-wrapper">
-                            <a href="/" className="logo">Sourcely</a>
-                        </div>
-                        <div className="form-wrapper">
-                            <h1 className="hr">Login To Your Account</h1>
-                            <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
-                            <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
-                            <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
-                            <div className="login-helper">
-                                <a href="/signup">Don't have an account yet?</a>
-                                <a href="/forgot">Forget your username or password?</a>
-                            </div>
-                        </div>
-                        <div className="footer-wrapper">
-                        <a href="/" className="privacy-policy">Privacy Policy</a>
-                        </div>
+            <LoginLogoutWrapper>
+                <div className="form-wrapper">
+                    <h1 className="hr">Login To Your Account</h1>
+                    <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
+                    <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
+                    <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
+                    <div className="login-helper">
+                        <a href="/signup">Don't have an account yet?</a>
+                        <a href="/forgot">Forget your username or password?</a>
                     </div>
                 </div>
-            </div>
+            </LoginLogoutWrapper>
 
             <style jsx>{`
-            .page-wrapper {
-                display: flex;
-                flex-direction: row;
-                min-height: 100vh;
-                margin: 0;
-                padding: 0;
-            }
-            .signup-form {
+
+            .form-wrapper {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
-                min-height: 100vh;
-                max-width: 500px;
-                box-sizing: border-box;
-            }
-
-            .logo-wrapper, .form-wrapper, .footer-wrapper  {
-                padding: 50px;
-            }
-
-            a {
-                text-decoration: none;
-                color: black;
-                text-align: left;
-            }
-
-            a:hover {
-                cursor: pointer;
-            }
-
-            .logo {
-                font-size: 35px;
-                font-weight: bold;
-            }
-
-            .left-third {
-                background: rgb(208,214,255);
-                background: linear-gradient(143deg, rgba(208,214,255,0.6068802521008403) 0%, rgba(144,175,176,0.23433123249299714) 100%);
-                min-width: 35%;
-                display: flex;
+                width: 100%:
                 justify-content: center;
-                align-items: center;
-            }
-
-            .right-third {
-                width: 65%;
+                box-sizing: border-box;
+                padding: 0px 100px;
             }
 
             .hr::before {
@@ -156,41 +107,30 @@ const login = () => {
                 margin-bottom: 20px;
             }
 
-            button {
-                padding-top: 30px;
-            }
-
             .login-helper {
                 padding-top: 8px;
-                text-decoration: underline;
                 display: flex;
                 flex-direction: row;
-                justify-content: space-between;
+                align-items: center;
             }
 
-            @media only screen and (max-width: 900px) {
-                .page-wrapper {
-                    justify-content: center;
+            .login-helper a {
+                padding-left: 5px;
+                text-decoration: underline;
+            }
+
+            a:visited {
+                text-decoration: none;
+                color: black;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .form-wrapper {
+                    padding: 0px 50px;
                 }
-
-                .left-third {
-                    display: none;
-                }
             }
 
-            @media only screen and (max-width: 755px) {
-                .right-third {
-                    width: 100%;
-                }
-            }
-
-            @media only screen and (max-width: 500px) {
-                .logo-wrapper, .form-wrapper, .footer-wrapper  {
-                padding: 30px;
-            }
-            }
-
-            `}</style>
+`}</style>
         </>
     )
 }
