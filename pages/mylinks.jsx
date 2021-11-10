@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { UserContext } from '../context/UserContext';
 import LinkHistory from '../components/LinkHistory';
-import TopNav from '../components/TopNav';
 import API from '../utils/API';
 import { useRouter } from 'next/router';
-import SideNav from '../components/SideNav';
+import DashboardWrapper from '../components/DashboardWrapper';
 
 export const mylinks = () => {
     const { user, setUser } = useContext(UserContext);
@@ -38,22 +37,9 @@ export const mylinks = () => {
     }, [user])
 
     return (
-        user ? (
-            <>
-              <div className="page-wrapper">
-                <SideNav />
-                <LinkHistory />
-              </div>
-
-              <style jsx>{`
-                .page-wrapper {
-                  display: flex;
-
-                }
-              `}</style>
-            </>
-          ) :
-            <h2>Loading...</h2>
+      <DashboardWrapper>
+        <LinkHistory />
+      </DashboardWrapper>
     )
 }
 

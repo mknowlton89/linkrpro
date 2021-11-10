@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import CampaignBuilder from '../components/CampaignBuilder'
 import { useRouter } from 'next/router'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import API from '../utils/API';
 import SideNav from '../components/SideNav';
-import { PromiseProvider } from 'mongoose';
 
 const DashboardWrapper = ({children}) => {
     const { user, setUser } = useContext(UserContext);
@@ -65,7 +63,6 @@ const DashboardWrapper = ({children}) => {
           <style jsx>{`
             .page-wrapper {
               display: flex;
-
             }
           `}</style>
         </>

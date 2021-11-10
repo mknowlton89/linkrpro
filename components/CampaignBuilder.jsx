@@ -116,7 +116,6 @@ const CampaignBuilder = () => {
     console.log(user, "User")
 
     return (
-        user && (
             <>
                 <PageContentWrapper>
                     <h1>Build a Trackable URL</h1>
@@ -337,7 +336,6 @@ const CampaignBuilder = () => {
             `}</style>
             </>
         )
-    )
 }
 
 export default CampaignBuilder
