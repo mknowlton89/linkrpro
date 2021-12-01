@@ -8,6 +8,7 @@ export default async (req, res) => {
     let newLink = await Link.create({
             link: req.body.link.trim(),
             user: req.body.user,
+            createdOn: new Date().toString()
         })
 
     res.json(newLink)
