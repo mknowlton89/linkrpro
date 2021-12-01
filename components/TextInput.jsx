@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { StyledInput, StyledListItem, FlexColumnDiv } from '../styles/StyledComponents'
 
-// interface Props {
-//     fieldPreviewText: string,
-//     fieldName: string,
-//     setLinkInputs: any,
-//     linkInputs: any,
-//     fieldType: string,
-//     error?: boolean,
-// }
-
 const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, error, options }) => {
     const [filteredList, setFilteredList] = useState([]);
     const [dropDownActive, setDropDownActive] = useState(false);
     const [isValid, setIsValid] = useState(true);
+
+    const spaceReplacement = /\s/g;
 
     const handleInputFilter = (input, fieldName) => {
         if (options[fieldName]) {
@@ -54,7 +47,7 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
                     fieldName={fieldName}
                     value={linkInputs[fieldName] ? linkInputs[fieldName] : ''}
                     placeholder={`Enter ${fieldPreviewText}`}
-                    onChange={(e) => handleInputChange(e.target.value.toLowerCase(), fieldName)}>
+                    onChange={(e) => handleInputChange(e.target.value.toLowerCase().replace(spaceReplacement, '-'), fieldName)}>
                 </StyledInput>
             </form>
             <div className={`options ${!dropDownActive ? 'hidden' : ''}`}>
