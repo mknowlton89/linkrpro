@@ -111,7 +111,7 @@ const CampaignBuilder = () => {
             <>
                 <PageContentWrapper>
                     <h1>Build a Trackable URL</h1>
-                    <h5>Fill out all of the required fields and we'll generate a link for you.</h5>
+                    <h4>Fill out all of the required fields and we'll generate a link for you.</h4>
 
                     <div className="required-text-div">
                         <span className="required-text-span">* Indicates a field is required</span>
