@@ -48,6 +48,9 @@ const UserSchema = new mongoose.Schema(
     },
     resetToken: {
       type: String,
+    },
+    stripeCustomerId: {
+      type: String,
     }
   });
 

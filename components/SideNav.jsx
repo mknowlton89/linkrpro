@@ -1,14 +1,47 @@
-import React from 'react'
-import Button from './Button';
-import { useRouter } from 'next/router'
+import React, { useEffect, useState, useContext } from 'react'
 import Image from 'next/image'
+import { createBillingPortalSession } from 'next-stripe/client'
+import API from '../utils/API'
+import { UserContext } from '../context/UserContext'
 
 const SideNav = () => {
-    const router = useRouter()
+    let [sessionUrl, setSessionUrl] = useState("");
+    const { user } = useContext(UserContext);
+
+    useEffect(() => {
+
+        //     async function getBillingPortalUrl() {
+        //         console.log("getBillingPortalUrl was called")
+        //         const session =  await createBillingPortalSession({
+        //             customer: "cus_KWPs3prS2AQvul",
+        //             return_url: window.location.href
+        //             })
+
+        //         console.log(session.url)
+
+        //         if (session) {
+        //             setSessionUrl(session.url)
+        //         }
+        //     }
+
+        if (user) {
+            API.getStripeCustomerId(user.email)
+                .then((res) => console.log(res))
+                .catch(err => console.log(err))
+            // getBillingPortalUrl()
+        }
+
+
+
+    }, [UserContext])
 
     const handleLogout = () => {
         localStorage.clear();
     }
+
+
+
+    console.log(sessionUrl)
 
     return (
         <div className="side-nav-wrapper">
@@ -50,7 +83,8 @@ const SideNav = () => {
                                 width={20}
                                 height={20}
                             />
-                            <a href="/account">Billing</a>
+                            <a href={sessionUrl}>Billing</a>
+                            {/* <button onClick={handleBillingClick}>Billing</button> */}
                         </div>
                     </div>
                 </div>

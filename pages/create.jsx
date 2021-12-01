@@ -15,6 +15,11 @@ const Create = () => {
 
             if (queryParams.get('success')) {
               API.updateCreditCardOnFile(user, true)
+
+            //   API.getStripeCustomerId(user.email)
+            //     .then((res) => {
+            //         let stripeCustomerId = res.data.
+            //     })
             }
           };
 

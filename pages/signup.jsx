@@ -124,48 +124,55 @@ const Signup = () => {
 
             <style jsx>{`
 
-.form-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%:
-    justify-content: center;
-    box-sizing: border-box;
-    padding: 0px 100px;
-}
+            .form-wrapper {
+                display: flex;
+                flex-direction: column;
+                width: 100%:
+                justify-content: center;
+                box-sizing: border-box;
+                padding: 0px 100px;
+                max-width: 600px;
+            }
 
-.hr::before {
-    background-color: #6161e8;
-    display: block;
-    content: "";
-    height: 5px;
-    width: 34px;
-    margin-bottom: 20px;
-}
+            .hr::before {
+                background-color: #6161e8;
+                display: block;
+                content: "";
+                height: 5px;
+                width: 34px;
+                margin-bottom: 20px;
+            }
 
-.login-helper {
-    padding-top: 8px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
+            .login-helper {
+                padding-top: 8px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
 
-.login-helper a {
-    padding-left: 5px;
-    text-decoration: underline;
-}
+            .login-helper a {
+                padding-left: 5px;
+                text-decoration: underline;
+            }
 
-a:visited {
- text-decoration: none;
- color: black;
-}
+            a:visited {
+                text-decoration: none;
+                color: black;
+            }
 
-@media only screen and (max-width: 600px) {
+            @media only screen and (min-width: 1000px) {
+                .form-wrapper {
+                    padding: 0px 0px 0px 100px;
+                }
+            }
+
+            @media only screen and (max-width: 600px) {
                 .form-wrapper {
                     padding: 0px 50px;
                 }
             }
 
-`}</style>
+            `}</style>
         </>
     )
 }

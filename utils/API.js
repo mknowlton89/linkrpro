@@ -1,5 +1,9 @@
 import axios from "axios";
 
+const stripeHeaders = {
+    headers: { Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}` }
+};
+
 export default {
     authorizeUser: function (authToken) {
         return axios.post("/api/auth/", {
@@ -41,6 +45,10 @@ export default {
                 userEmail: userEmail,
             }
         })
+    },
+    getStripeCustomerId: function (email) {
+        console.log(process.env.STRIPE_SECRET_KEY);
+        return axios.get(`https://api.stripe.com/v1/customers?email=${email}`, stripeHeaders, {})
     },
     getLinkHistoryById: function (userId) {
         return axios.get('/api/links/history', {

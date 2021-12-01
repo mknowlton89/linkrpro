@@ -96,6 +96,7 @@ const login = () => {
                 justify-content: center;
                 box-sizing: border-box;
                 padding: 0px 100px;
+                max-width: 600px;
             }
 
             .hr::before {
@@ -124,13 +125,19 @@ const login = () => {
                 color: black;
             }
 
+            @media only screen and (min-width: 1000px) {
+                .form-wrapper {
+                    padding: 0px 0px 0px 100px;
+                }
+            }
+
             @media only screen and (max-width: 600px) {
                 .form-wrapper {
                     padding: 0px 50px;
                 }
             }
 
-`}</style>
+            `}</style>
         </>
     )
 }
