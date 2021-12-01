@@ -1,5 +1,5 @@
 import dbConnect from "../../../lib/dbConnect";
-import CampaignUrl from "../../../models/campaignUrl";
+import CampaignUrl from "../../../models/CampaignUrl";
 import CampaignSource from "../../../models/CampaignSource";
 import CampaignMedium from "../../../models/CampaignMedium";
 import CampaignName from "../../../models/CampaignName";
