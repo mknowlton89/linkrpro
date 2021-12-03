@@ -1,17 +1,19 @@
 import React, { useMemo } from 'react'
-import { PageContentWrapper } from '../styles/StyledComponents';
-import { useTable } from 'react-table'
+import { PageContentWrapper, StyledSecondaryLink } from '../styles/StyledComponents';
+import { useTable, useGlobalFilter } from 'react-table'
+import { GlobalTableFilter } from './GlobalTableFilter';
 
 const LinkHistory = (props) => {
-    let data = null;
 
-    data = props.data.map(link => {
-        return {
-            createdOn: link.createdOn,
-            link: link.link,
-            user: link.user,
-        }
-    })
+    const data = useMemo(()=> props.data.map(link => {
+        return (
+            {
+                createdOn: link.createdOn,
+                link: link.link,
+                user: link.user,
+            }
+        )
+    }),[props.data])
 
     const columns = useMemo(
         () => [
@@ -31,21 +33,29 @@ const LinkHistory = (props) => {
         []
     )
 
-    const tableInstance = useTable({ columns, data });
-
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow,
-    } = tableInstance;
+        state,
+        setGlobalFilter,
+    } = useTable({
+            columns,
+            data,
+        },
+        useGlobalFilter
+    )
+
+    const { globalFilter } = state;
 
     return (
         <>
             <PageContentWrapper>
                 <h1>Your Link History</h1>
                 <div className="table-wrapper">
+                    <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} />
                     <table {...getTableProps()}
                         style={{
                             border: 'solid 1px black',
