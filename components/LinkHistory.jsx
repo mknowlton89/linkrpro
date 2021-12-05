@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { PageContentWrapper, StyledSecondaryLink } from '../styles/StyledComponents';
-import { useTable, useGlobalFilter, usePagination } from 'react-table'
+import { useTable, useGlobalFilter, usePagination, useSortBy } from 'react-table'
 import { GlobalTableFilter } from './GlobalTableFilter';
 
 const LinkHistory = (props) => {
@@ -53,6 +53,7 @@ const LinkHistory = (props) => {
             data,
         },
         useGlobalFilter,
+        useSortBy,
         usePagination
     )
 
@@ -74,7 +75,7 @@ const LinkHistory = (props) => {
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
                             <th
-                                {...column.getHeaderProps()}
+                                {...column.getHeaderProps(column.getSortByToggleProps())}
                                 style={{
                                 borderBottom: 'solid 1px black',
                                 color: 'black',
@@ -84,6 +85,9 @@ const LinkHistory = (props) => {
                                 }}
                             >
                                 {column.render('Header')}
+                                <span>
+                                    {column.isSorted ? (column.isSortedDesc ? '\u25B2' : '\u25BC') : ''}
+                                </span>
                             </th>
                             ))}
                         </tr>
