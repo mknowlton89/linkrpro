@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react'
-import { PageContentWrapper, StyledSecondaryLink } from '../styles/StyledComponents';
+import { PageContentWrapper } from '../styles/StyledComponents';
 import { useTable, useGlobalFilter, usePagination, useSortBy } from 'react-table'
 import { GlobalTableFilter } from './GlobalTableFilter';
+import Button from './Button';
 
 const LinkHistory = (props) => {
 
@@ -63,8 +64,9 @@ const LinkHistory = (props) => {
         <>
             <PageContentWrapper>
                 <h1>Your Link History</h1>
+                <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} />
                 <div className="table-wrapper">
-                    <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} />
+                    {/* <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
                     <table {...getTableProps()}
                         style={{
                             border: 'solid 1px black',
@@ -116,22 +118,37 @@ const LinkHistory = (props) => {
                         })}
                     </tbody>
                     </table>
-                    <div>
+                </div>
+                <div className="table-nav-wrapper">
+                    <div className="table-nav-header-wrapper">
+                    <div className="table-nav-button-header">
                         <p>Page{' '}{pageIndex + 1} of {pageOptions.length}</p>
-                        <button disabled={!canPreviousPage} onClick={() => previousPage()}>Previous</button>
-                        <button disabled={!canNextPage} onClick={() => nextPage()}>Next</button>
-                        <span>
-                            Go to Page: {' '}
-                            <input
-                                type="number"
-                                defaultValue={pageIndex + 1}
-                                onChange={e => {
-                                const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
-                                gotoPage(pageNumber)
-                            }} />
+                    </div>
+                    <span>
+                        Go to Page: {' '}
+                        <input
+                            type="text"
+                            // defaultValue={pageIndex + 1}
+                            onChange={e => {
+                            const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+                            gotoPage(pageNumber)
+                        }} />
                         </span>
                     </div>
-                </div>
+                    <div className="table-nav-button-wrapper">
+                        {/* <div className="table-nav-button-header">
+                            <p>Page{' '}{pageIndex + 1} of {pageOptions.length}</p>
+                        </div> */}
+                        <div className="table-nav-buttons">
+                            <div className="first-button">
+                                <Button primary disabled={!canPreviousPage} onClick={() => previousPage()}>Previous</Button>
+                            </div>
+                            <div>
+                                <Button primary disabled={!canNextPage} onClick={() => nextPage()}>Next</Button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
             </PageContentWrapper>
 
             <style jsx>{`
@@ -168,6 +185,56 @@ const LinkHistory = (props) => {
 
                 .table-row p:hover {
                     background-color: #fdfdfd
+                }
+
+                .table-nav-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 16px;
+                }
+
+                .table-nav-button-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .table-nav-wrapper input {
+                    width: 35px;
+                    max-width: 35px;
+                    text-align: center;
+                    height: 35px;
+                    /* margin-left: 10px; */
+                    border: none;
+                    border-radius: 5px;
+                    background-color: #d1d1d1;
+                    /* padding: 0px 10px 0px 10px; */
+                    font-size: 16px;
+                }
+
+                .table-nav-header-wrapper {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .table-nav-wrapper input:focus {
+                    outline: none;
+                }
+
+                .table-nav-button-header {
+                    padding-right: 20px;
+                }
+
+                .table-nav-buttons {
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .first-button {
+                    margin-right: 10px;
                 }
 
             `}</style>
