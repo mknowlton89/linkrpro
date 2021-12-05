@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { PageContentWrapper, StyledSecondaryLink } from '../styles/StyledComponents';
-import { useTable, useGlobalFilter } from 'react-table'
+import { useTable, useGlobalFilter, usePagination } from 'react-table'
 import { GlobalTableFilter } from './GlobalTableFilter';
 
 const LinkHistory = (props) => {
@@ -37,18 +37,26 @@ const LinkHistory = (props) => {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
+        page,
+        nextPage,
+        previousPage,
         prepareRow,
+        canNextPage,
+        canPreviousPage,
+        pageOptions,
+        gotoPage,
+        pageCount,
         state,
         setGlobalFilter,
     } = useTable({
             columns,
             data,
         },
-        useGlobalFilter
+        useGlobalFilter,
+        usePagination
     )
 
-    const { globalFilter } = state;
+    const { globalFilter, pageIndex } = state;
 
     return (
         <>
@@ -82,7 +90,7 @@ const LinkHistory = (props) => {
                         ))}
                     </thead>
                     <tbody {...getTableBodyProps()}>
-                        {rows.map(row => {
+                        {page.map(row => {
                         prepareRow(row)
                         return (
                             <tr {...row.getRowProps()}>
@@ -104,6 +112,21 @@ const LinkHistory = (props) => {
                         })}
                     </tbody>
                     </table>
+                    <div>
+                        <p>Page{' '}{pageIndex + 1} of {pageOptions.length}</p>
+                        <button disabled={!canPreviousPage} onClick={() => previousPage()}>Previous</button>
+                        <button disabled={!canNextPage} onClick={() => nextPage()}>Next</button>
+                        <span>
+                            Go to Page: {' '}
+                            <input
+                                type="number"
+                                defaultValue={pageIndex + 1}
+                                onChange={e => {
+                                const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+                                gotoPage(pageNumber)
+                            }} />
+                        </span>
+                    </div>
                 </div>
             </PageContentWrapper>
 
