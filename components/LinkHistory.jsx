@@ -7,11 +7,12 @@ import Button from './Button';
 const LinkHistory = (props) => {
 
     const data = useMemo(()=> props.data.map(link => {
+        // console.log(link.createdOn.toLocaleDateString())
         return (
             {
-                createdOn: link.createdOn,
+                createdOn: new Date(link.createdOn).toLocaleString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'}), //NEED TO FORMAT THIS BETTER
                 link: link.link,
-                user: link.user,
+                // user: link.user, //TAKING THIS OUT FOR NOW UNTIL WE GET BETTER ABOUT GETTING FNAME AND LNAME
             }
         )
     }),[props.data])
@@ -25,11 +26,11 @@ const LinkHistory = (props) => {
           {
             Header: 'URL',
             accessor: 'link',
-          },
-          {
-            Header: 'User',
-            accessor: 'user'
           }
+        //   {
+        //     Header: 'User',
+        //     accessor: 'user'
+        //   }
         ],
         []
     )
@@ -66,25 +67,25 @@ const LinkHistory = (props) => {
                 <h1>Your Link History</h1>
                 <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} />
                 <div className="table-wrapper">
-                    {/* <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
                     <table {...getTableProps()}
-                        style={{
-                            border: 'solid 1px black',
-                            fontSize: '15px'
-                        }}>
+                        // style={{
+                        //     border: 'solid 1px black',
+                        //     fontSize: '15px'
+                        // }}
+                        >
                     <thead>
                         {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
                             <th
                                 {...column.getHeaderProps(column.getSortByToggleProps())}
-                                style={{
-                                borderBottom: 'solid 1px black',
-                                color: 'black',
-                                fontWeight: 'bold',
-                                height: '25px',
-                                fontSize: '17px'
-                                }}
+                                // style={{
+                                // borderBottom: 'solid 1px black',
+                                // color: 'black',
+                                // fontWeight: 'bold',
+                                // height: '25px',
+                                // fontSize: '17px'
+                                // }}
                             >
                                 {column.render('Header')}
                                 <span>
@@ -104,10 +105,10 @@ const LinkHistory = (props) => {
                                 return (
                                 <td
                                     {...cell.getCellProps()}
-                                    style={{
-                                    padding: '10px',
-                                    border: 'solid 1px gray',
-                                    }}
+                                    // style={{
+                                    // padding: '10px',
+                                    // border: 'solid 1px gray',
+                                    // }}
                                 >
                                     {cell.render('Cell')}
                                 </td>
@@ -128,7 +129,6 @@ const LinkHistory = (props) => {
                         Go to Page: {' '}
                         <input
                             type="text"
-                            // defaultValue={pageIndex + 1}
                             onChange={e => {
                             const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
                             gotoPage(pageNumber)
@@ -136,9 +136,6 @@ const LinkHistory = (props) => {
                         </span>
                     </div>
                     <div className="table-nav-button-wrapper">
-                        {/* <div className="table-nav-button-header">
-                            <p>Page{' '}{pageIndex + 1} of {pageOptions.length}</p>
-                        </div> */}
                         <div className="table-nav-buttons">
                             <div className="first-button">
                                 <Button primary disabled={!canPreviousPage} onClick={() => previousPage()}>Previous</Button>
@@ -152,10 +149,18 @@ const LinkHistory = (props) => {
             </PageContentWrapper>
 
             <style jsx>{`
-                .history-table {
+                {/* .history-table {
                     display: flex;
                     flex-direction: column;
                     padding: 20px;
+                } */}
+
+                table {
+                    width: 100%;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    padding: 20px;
+                    font-size: 15px;
                 }
 
                 .table-wrapper {
@@ -164,28 +169,46 @@ const LinkHistory = (props) => {
                     align-self: center;
                 }
 
-                table {
-                    width: 100%;
+                th {
+                    background-color: #be995575;
+                    height: 35px;
+                    font-size: 16px;
                 }
 
-                .table-title {
+                tr {
+                    height: 45px;
+                }
+
+                td {
+                    padding: 10px;
+                    box-sizing: border-box;
+                }
+
+                tr:nth-child(even) {background: #f3f3f3}
+
+                {/* tr:hover {
+                    cursor: pointer;
+                    background-color: #f3f3f3;
+                } */}
+
+                {/* .table-title {
                     background-color: #efefef;
                     margin-bottom: 30px;
-                }
+                } */}
 
-                .table-title h1 {
+                {/* .table-title h1 {
                     padding-left: 20px;
-                }
+                } */}
 
-                .table-row p {
+                {/* .table-row p {
                     padding: 12px;
                     font-size: 18px;
                     margin: 0;
-                }
+                } */}
 
-                .table-row p:hover {
+                {/* .table-row p:hover {
                     background-color: #fdfdfd
-                }
+                } */}
 
                 .table-nav-wrapper {
                     display: flex;
@@ -195,11 +218,11 @@ const LinkHistory = (props) => {
                     font-size: 16px;
                 }
 
-                .table-nav-button-wrapper {
+                {/* .table-nav-button-wrapper {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                }
+                } */}
 
                 .table-nav-wrapper input {
                     width: 35px;
@@ -209,7 +232,7 @@ const LinkHistory = (props) => {
                     /* margin-left: 10px; */
                     border: none;
                     border-radius: 5px;
-                    background-color: #d1d1d1;
+                    background-color: #e7e7e7;
                     /* padding: 0px 10px 0px 10px; */
                     font-size: 16px;
                 }
