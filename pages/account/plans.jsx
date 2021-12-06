@@ -1,6 +1,6 @@
 import React from 'react'
-import DashboardWrapper from '../components/DashboardWrapper';
-import MyAccount from '../components/MyAccount';
+import DashboardWrapper from '../../components/DashboardWrapper';
+import MyAccount from '../../components/MyAccount';
 
 const account = () => {
 
