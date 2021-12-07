@@ -1,12 +1,17 @@
 import React from 'react'
 import DashboardWrapper from '../../components/DashboardWrapper';
-import PlanAndBilling from '../../components/PlanAndBilling';
+import { PageContentWrapper } from '../../styles/StyledComponents';
+import AccountPageTemplate from '../../components/AccountPageTemplate';
 
 const plans = () => {
 
     return (
       <DashboardWrapper>
-        <PlanAndBilling />
+        <PageContentWrapper>
+          <AccountPageTemplate headline="My Account" activePage={'plans'}>
+            <h1>This is children content</h1>
+          </AccountPageTemplate>
+        </PageContentWrapper>
       </DashboardWrapper>
     )
 }

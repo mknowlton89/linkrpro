@@ -21,6 +21,7 @@ export const AccountHeader = ({ activePage }) => {
                     height: 90px;
                     background-color: #fff;
                     box-sizing: border-box;
+                    margin: 30px 0px;
                 }
 
                 a {
