@@ -1,14 +1,14 @@
 import React from 'react'
 import DashboardWrapper from '../../components/DashboardWrapper';
-import MyAccount from '../../components/MyAccount';
+import Security from '../../components/Security';
 
-const account = () => {
+const security = () => {
 
     return (
       <DashboardWrapper>
-        <MyAccount />
+        <Security />
       </DashboardWrapper>
     )
 }
 
-export default account
+export default security

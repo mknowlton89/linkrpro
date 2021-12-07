@@ -1,14 +1,14 @@
 import React from 'react'
 import DashboardWrapper from '../../components/DashboardWrapper';
-import MyAccount from '../../components/MyAccount';
+import PlanAndBilling from '../../components/PlanAndBilling';
 
-const account = () => {
+const plans = () => {
 
     return (
       <DashboardWrapper>
-        <MyAccount />
+        <PlanAndBilling />
       </DashboardWrapper>
     )
 }
 
-export default account
+export default plans

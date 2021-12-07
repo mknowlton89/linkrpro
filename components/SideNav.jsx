@@ -56,7 +56,7 @@ const SideNav = () => {
                                 width={20}
                                 height={20}
                             />
-                            <a href="/create">Campaign Builder</a>
+                            <a href="/create">New Link</a>
                         </div>
                         <div className="link-group">
                             <Image

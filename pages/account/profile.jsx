@@ -1,12 +1,12 @@
 import React from 'react'
 import DashboardWrapper from '../../components/DashboardWrapper';
-import MyAccount from '../../components/MyAccount';
+import Profile from '../../components/Profile';
 
 const account = () => {
 
     return (
       <DashboardWrapper>
-        <MyAccount />
+        <Profile />
       </DashboardWrapper>
     )
 }
