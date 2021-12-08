@@ -25,7 +25,15 @@ const DashboardWrapper = ({children}) => {
                     setUser({
                         _id: res.data.user.userId,
                         email: res.data.user.email,
-                        currentToken: authToken
+                        currentToken: authToken,
+                        firstName: res.data.user.firstName,
+                        lastName: res.data.user.lastName,
+                        companyName: res.data.user.companyName,
+                        ccOnFile: res.data.user.ccOnFile,
+                        plan: res.data.user.plan,
+                        planPrice: res.data.user.planPrice,
+                        signUpDate: res.data.user.signUpDate,
+                        accountStatus: res.data.user.accountStatus,
                     })
                 })
                 .catch((err) => {

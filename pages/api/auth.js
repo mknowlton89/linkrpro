@@ -8,6 +8,7 @@ export default async function handler(req, res) {
 
     try {
         let user = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        console.log(user)
 
         res.status(201).json({success: "Success", user: user})
     } catch (error) {

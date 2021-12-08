@@ -18,11 +18,19 @@ const login = () => {
     const handleSubmit = () => {
         API.loginUser(userLoginData)
             .then((res) => {
-                console.log(res)
+                console.log(res.data)
                 setUser({
                     _id: res.data.userId,
                     email: res.data.email,
-                    currentToken: res.data.token
+                    currentToken: res.data.token,
+                    firstName: res.data.firstName,
+                    lastName: res.data.lastName,
+                    companyName: res.data.companyName,
+                    ccOnFile: res.data.ccOnFile,
+                    plan: res.data.plan,
+                    planPrice: res.data.planPrice,
+                    signUpDate: res.data.signUpDate,
+                    accountStatus: res.data.accountStatus,
                 })
 
                 window.localStorage.setItem('authToken', res.data.token);

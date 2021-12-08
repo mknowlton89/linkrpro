@@ -21,7 +21,7 @@ const account = () => {
       .catch(err => console.log(err))
   }
 
-  console.log(userInfo);
+  console.log(user);
 
     return (
       <>
