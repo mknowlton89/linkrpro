@@ -23,6 +23,18 @@ const UserSchema = new mongoose.Schema(
       maxlength: [50, 'Password must be between 6 and 50 characters'],
       required: [true, 'A password is required']
     },
+    firstName: {
+      type: String,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      trim: true,
+    },
+    companyName: {
+      type: String,
+      trim: true,
+    },
     ccOnFile: {
       type: Boolean,
       default: false,

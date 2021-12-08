@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DashboardWrapper from '../../components/DashboardWrapper';
 import { PageContentWrapper } from '../../styles/StyledComponents';
 import AccountPageTemplate from '../../components/AccountPageTemplate';
 import Button from '../../components/Button';
+import API from '../../utils/API';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 
 const account = () => {
+  const [ userInfo, setUserInfo] = useState({});
+  const { user } = useContext(UserContext);
+
+  const handleInputChange = (input, fieldName) => {
+    setUserInfo({ ...userInfo, [fieldName]: input })
+  }
+
+  const handleSubmit = () => {
+    API.updateUserInfo(user, userInfo)
+      .then((res) => console.log(res.data))
+      .catch(err => console.log(err))
+  }
+
+  console.log(userInfo);
 
     return (
       <>
@@ -17,21 +34,21 @@ const account = () => {
                     <h2>Personal Information</h2>
                   </div>
                     <form>
-                      <label for="fname">First Name:</label>
-                      <input type="text" id="fname" name="fname" />
+                      <label for="firstName">First Name:</label>
+                      <input type="text" id="firstName" name="firstName" onChange={(e) => handleInputChange(e.target.value, 'firstName')} />
 
-                      <label for="lname">Last Name:</label>
-                      <input type="text" id="lname" name="lname" />
+                      <label for="lastName">Last Name:</label>
+                      <input type="text" id="lastName" name="lastName" onChange={(e) => handleInputChange(e.target.value, 'lastName')} />
 
                       <label for="email">Email Address:</label>
-                      <input type="email" id="email" name="email" />
+                      <input type="email" id="email" name="email" onChange={(e) => handleInputChange(e.target.value, 'email')} />
 
                       <label for="company">Company Name:</label>
-                      <input type="text" id="company" name="company" />
+                      <input type="text" id="companyName" name="companyName" onChange={(e) => handleInputChange(e.target.value, 'companyName')} />
                     </form>
                 </div>
                 <div className='button-wrapper'>
-                  <Button primary>Save</Button>
+                  <Button primary onClick={handleSubmit}>Save</Button>
                 </div>
               </div>
             </AccountPageTemplate>

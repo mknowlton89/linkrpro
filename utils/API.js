@@ -47,7 +47,7 @@ export default {
         })
     },
     getStripeCustomerId: function (email) {
-        console.log(process.env.STRIPE_SECRET_KEY);
+        // console.log(process.env.STRIPE_SECRET_KEY);
         return axios.get(`https://api.stripe.com/v1/customers?email=${email}`, stripeHeaders, {})
     },
     getLinkHistoryById: function (userId) {
@@ -90,6 +90,16 @@ export default {
                 planName: planName,
                 planPrice: planPrice,
             });
+    },
+    updateUserInfo: function (user, userInfoToUpdate) {
+        // console.log(...props)
+        return axios.put('/api/user-update', {
+            user: user,
+            email: userInfoToUpdate.email,
+            firstName: userInfoToUpdate.firstName,
+            lastName: userInfoToUpdate.lastName,
+            companyName: userInfoToUpdate.companyName,
+        })
     },
     updateCreditCardOnFile: function (user, ccOnFile) {
         return axios.put('/api/user-add-cc', {
