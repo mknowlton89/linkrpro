@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
                 let authToken = jwt.sign({
                     userId: newUser._id,
-                    email: newUser.email
+                    email: newUser.email,
                 }, process.env.JWT_SECRET_KEY, {
                     expiresIn: "24h"
                 });
@@ -29,6 +29,9 @@ export default async function handler(req, res) {
         case "PUT":
             try {
                 // console.log(req)
+                // TODO: I should explore if we can pass in an existing authToken, and then update that authToken with whatever we update
+                // so that /login isn't the only time the authToken would get hydrated with more userInfo.
+                // But I should do it in a way where it doesn't reset the authToken, just adds data to it.
                 const updatedUser = await User.updateOne({_id: req.body.user._id}, {plan: req.body.planName, planPrice: req.body.planPrice})
 
                 res.status(200).json({success: true, data: updatedUser})

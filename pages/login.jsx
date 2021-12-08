@@ -35,7 +35,8 @@ const login = () => {
 
                 window.localStorage.setItem('authToken', res.data.token);
                 if (res.status === 200) {
-                    router.push('/create')
+                    // router.push('/create')
+                    router.route('/create')
                 }
             })
             .catch(err => console.log(err, "Error Finding User"))

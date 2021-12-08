@@ -8,7 +8,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 
 const account = () => {
-  const [ userInfo, setUserInfo] = useState({});
+  const [ userInfo, setUserInfo] = useState();
   const { user } = useContext(UserContext);
 
   const handleInputChange = (input, fieldName) => {
@@ -20,8 +20,6 @@ const account = () => {
       .then((res) => console.log(res.data))
       .catch(err => console.log(err))
   }
-
-  console.log(user);
 
     return (
       <>
@@ -35,16 +33,16 @@ const account = () => {
                   </div>
                     <form>
                       <label for="firstName">First Name:</label>
-                      <input type="text" id="firstName" name="firstName" onChange={(e) => handleInputChange(e.target.value, 'firstName')} />
+                      <input type="text" id="firstName" name="firstName" defaultValue={user ? user.firstName : ''} onChange={(e) => handleInputChange(e.target.value, 'firstName')} />
 
                       <label for="lastName">Last Name:</label>
-                      <input type="text" id="lastName" name="lastName" onChange={(e) => handleInputChange(e.target.value, 'lastName')} />
+                      <input type="text" id="lastName" name="lastName" defaultValue={user ? user.lastName : ''} onChange={(e) => handleInputChange(e.target.value, 'lastName')} />
 
                       <label for="email">Email Address:</label>
-                      <input type="email" id="email" name="email" onChange={(e) => handleInputChange(e.target.value, 'email')} />
+                      <input type="email" id="email" name="email" defaultValue={user ? user.email : ''} onChange={(e) => handleInputChange(e.target.value, 'email')} />
 
                       <label for="company">Company Name:</label>
-                      <input type="text" id="companyName" name="companyName" onChange={(e) => handleInputChange(e.target.value, 'companyName')} />
+                      <input type="text" id="companyName" name="companyName" defaultValue={user ? user.companyName : ''} onChange={(e) => handleInputChange(e.target.value, 'companyName')} />
                     </form>
                 </div>
                 <div className='button-wrapper'>
