@@ -4,16 +4,16 @@ import { AccountHeader } from './AccountHeader'
 const AccountContentWrapper = ({ children }) => {
     return (
         <>
-            <div className='personal-details-wrapper'>{children}</div>
+            <div className='account-content-wrapper'>{children}</div>
 
             <style jsx>{`
-                .personal-details-wrapper {
+                .account-content-wrapper {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     justify-content: center;
                     width: 100%;
-                    height: 500px;
+                    height: 100%;
                     background-color: #fff;
                     box-sizing: border-box;
                 }
