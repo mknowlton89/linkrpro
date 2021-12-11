@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const AccountHeader = ({ activePage }) => {
-    console.log(activePage)
     return (
         <>
             <div className="account-header-wrapper">

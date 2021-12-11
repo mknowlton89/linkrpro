@@ -32,16 +32,16 @@ const account = () => {
                     <h2>Personal Information</h2>
                   </div>
                     <form>
-                      <label for="firstName">First Name:</label>
+                      <label htmlFor="firstName">First Name:</label>
                       <input type="text" id="firstName" name="firstName" defaultValue={user ? user.firstName : ''} onChange={(e) => handleInputChange(e.target.value, 'firstName')} />
 
-                      <label for="lastName">Last Name:</label>
+                      <label htmlFor="lastName">Last Name:</label>
                       <input type="text" id="lastName" name="lastName" defaultValue={user ? user.lastName : ''} onChange={(e) => handleInputChange(e.target.value, 'lastName')} />
 
-                      <label for="email">Email Address:</label>
+                      <label htmlFor="email">Email Address:</label>
                       <input type="email" id="email" name="email" defaultValue={user ? user.email : ''} onChange={(e) => handleInputChange(e.target.value, 'email')} />
 
-                      <label for="company">Company Name:</label>
+                      <label htmlFor="company">Company Name:</label>
                       <input type="text" id="companyName" name="companyName" defaultValue={user ? user.companyName : ''} onChange={(e) => handleInputChange(e.target.value, 'companyName')} />
                     </form>
                 </div>

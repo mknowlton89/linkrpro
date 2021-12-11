@@ -41,7 +41,7 @@ const SideNav = () => {
 
 
 
-    console.log(sessionUrl)
+    // console.log(sessionUrl)
 
     return (
         <div className="side-nav-wrapper">

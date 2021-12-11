@@ -92,7 +92,6 @@ export default {
             });
     },
     updateUserInfo: function (user, userInfoToUpdate) {
-        // console.log(...props)
         return axios.put('/api/user-update', {
             user: user,
             email: userInfoToUpdate.email,
@@ -105,6 +104,13 @@ export default {
         return axios.put('/api/user-add-cc', {
             user: user,
             ccOnFile: ccOnFile,
+        })
+    },
+    updateUserPassword: async function (user, userInfo) {
+        return axios.put('/api/user-password', {
+            user: user,
+            currentPassword: userInfo.currentPassword,
+            newPassword: userInfo.newPassword,
         })
     }
 }
