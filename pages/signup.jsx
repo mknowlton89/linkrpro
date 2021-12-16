@@ -36,7 +36,7 @@ const Signup = () => {
 
                 window.localStorage.setItem('authToken', res.data.token);
                 if (res.status === 200) {
-                    router.push('/welcome')
+                    router.route('/welcome')
                 }
             })
             .catch(err => setError(true))

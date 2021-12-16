@@ -17,3 +17,12 @@ body {
 h1 {
     font-size: 30px;
 }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+input:focus {
+    outline: none;
+}

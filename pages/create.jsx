@@ -27,6 +27,8 @@ const Create = () => {
 
       }, [user])
 
+      console.log(user)
+
     return (
         <DashboardWrapper>
             <CampaignBuilder />

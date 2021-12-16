@@ -41,7 +41,7 @@ const SideNav = () => {
 
 
 
-    console.log(sessionUrl)
+    // console.log(sessionUrl)
 
     return (
         <div className="side-nav-wrapper">
@@ -56,7 +56,7 @@ const SideNav = () => {
                                 width={20}
                                 height={20}
                             />
-                            <a href="/create">Campaign Builder</a>
+                            <a href="/create">New Link</a>
                         </div>
                         <div className="link-group">
                             <Image
@@ -74,16 +74,16 @@ const SideNav = () => {
                                 width={20}
                                 height={20}
                             />
-                            <a href="/account">Account</a>
+                            <a href="/account/profile">Account</a>
                         </div>
                         <div className="link-group">
                             <Image
-                                src="/icons/credit-card.png"
+                                src="/icons/settings.png"
                                 alt="Picture of the author"
                                 width={20}
                                 height={20}
                             />
-                            <a href={sessionUrl}>Billing</a>
+                            <a href={sessionUrl}>Settings</a>
                             {/* <button onClick={handleBillingClick}>Billing</button> */}
                         </div>
                     </div>
