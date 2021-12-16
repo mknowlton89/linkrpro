@@ -6,6 +6,9 @@ import Button from '../../components/Button';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import API from '../../utils/API';
+import Banner from '../../components/Banner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const security = () => {
   const { user } = useContext(UserContext);
@@ -32,10 +35,12 @@ const security = () => {
         if (res.status === 200) {
             //TODO: Clear input values when successful
             resetForm();
+            toast.success("SUCCESS!");
         }
       })
       .catch(err => console.log(err))
         //TODO: Add error state
+        toast.error('Unable to reset password')
     }
 
 
@@ -55,6 +60,7 @@ useEffect(() => {
 
     return (
       <>
+        <ToastContainer />
         <DashboardWrapper>
           <PageContentWrapper>
             <AccountPageTemplate headline="My Account" activePage={'security'}>
