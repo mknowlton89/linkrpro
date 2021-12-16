@@ -6,6 +6,8 @@ import Button from '../../components/Button';
 import API from '../../utils/API';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const account = () => {
   const [ userInfo, setUserInfo] = useState();
@@ -17,12 +19,19 @@ const account = () => {
 
   const handleSubmit = () => {
     API.updateUserInfo(user, userInfo)
-      .then((res) => console.log(res.data))
-      .catch(err => console.log(err))
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Your account has been updated.")
+        }
+      })
+      .catch(err => {
+        toast.error('Sorry - we were unable to save your updates.')
+      })
   }
 
     return (
       <>
+        <ToastContainer />
         <DashboardWrapper>
           <PageContentWrapper>
             <AccountPageTemplate headline="My Account" activePage={'profile'}>

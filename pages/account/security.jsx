@@ -6,7 +6,6 @@ import Button from '../../components/Button';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import API from '../../utils/API';
-import Banner from '../../components/Banner';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -33,14 +32,14 @@ const security = () => {
     API.updateUserPassword(user, userInfo)
       .then((res) => {
         if (res.status === 200) {
-            //TODO: Clear input values when successful
             resetForm();
             toast.success("SUCCESS!");
         }
       })
-      .catch(err => console.log(err))
-        //TODO: Add error state
+      .catch(err => {
         toast.error('Unable to reset password')
+      })
+
     }
 
 
