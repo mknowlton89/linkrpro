@@ -22,11 +22,16 @@ const security = () => {
     setUserInfo({ ...userInfo, [fieldName]: input })
   }
 
+  const resetForm = () => {
+    document.getElementById("passwordReset").reset();
+  }
+
   const handleSubmit = () => {
     API.updateUserPassword(user, userInfo)
       .then((res) => {
         if (res.status === 200) {
-            //TODO: Clear input values when successfull
+            //TODO: Clear input values when successful
+            resetForm();
         }
       })
       .catch(err => console.log(err))
@@ -58,7 +63,7 @@ useEffect(() => {
                     <div className="title-wrapper">
                       <h2>Update Your Password</h2>
                     </div>
-                      <form>
+                      <form id='passwordReset'>
                         <label htmlFor="currentPassword">Current Password:</label>
                         <input type="password" id="currentPassword" name="currentPassword" onChange={(e) => handleInputChange(e.target.value, 'currentPassword')} />
 
