@@ -6,10 +6,12 @@ import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import LoginLogoutWrapper from '../components/LoginLogoutWrapper'
+import ErrorMessage from '../components/ErrorMessage'
 
 const forgot = () => {
     const [userLoginData, setUserLoginData] = useState({});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [error, setError] = useState(false);
     const { user, setUser } = useContext(UserContext);
     const router = useRouter()
 
@@ -24,7 +26,7 @@ const forgot = () => {
                     // TODO: Give the user confirmation that we have sent an email
                 }
             })
-            .catch((err) => console.log(err))
+            .catch(err => setError(true))
     }
 
     const handleInputChange = (input, fieldName) => {
@@ -38,28 +40,28 @@ const forgot = () => {
     }, [userLoginData])
 
     useEffect(() => {
-        if (!user) {
+        // if (!user) {
 
-            if (typeof window !== 'undefined') {
-                authToken = localStorage.getItem('authToken');
-            };
+        //     if (typeof window !== 'undefined') {
+        //         authToken = localStorage.getItem('authToken');
+        //     };
 
-            console.log(authToken)
+        //     // console.log(authToken)
 
-            if (authToken) {
-                API.authorizeUser(authToken)
-                    .then((res) => {
-                        setUser({
-                            _id: res.data.user.userId,
-                            email: res.data.user.email,
-                            currentToken: authToken
-                        })
-                    })
-                    .catch((err) => {
-                        router.push('/login')
-                    })
-            };
-        }
+        //     if (authToken) {
+        //         API.authorizeUser(authToken)
+        //             .then((res) => {
+        //                 setUser({
+        //                     _id: res.data.user.userId,
+        //                     email: res.data.user.email,
+        //                     currentToken: authToken
+        //                 })
+        //             })
+        //             .catch((err) => {
+        //                 router.push('/login')
+        //             })
+        //     };
+        // }
 
         if (user) {
             router.push('/create')
@@ -73,6 +75,7 @@ const forgot = () => {
                     <h1 className="hr">Reset Your Password</h1>
                     <p>We'll send you a link to reset your password</p>
                     <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
+                    {error && <ErrorMessage message='Please enter a valid email address.' />}
                     <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Reset Password</Button>
                 </div>
             </LoginLogoutWrapper>

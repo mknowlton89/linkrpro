@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const account = () => {
   const [ userInfo, setUserInfo] = useState();
+  const [error, setError] = useState(false);
   const { user } = useContext(UserContext);
 
   const handleInputChange = (input, fieldName) => {
@@ -24,9 +25,7 @@ const account = () => {
           toast.success("Your account has been updated.")
         }
       })
-      .catch(err => {
-        toast.error('Sorry - we were unable to save your updates.')
-      })
+      .catch(err => setError(true))
   }
 
     return (
@@ -54,6 +53,7 @@ const account = () => {
                       <input type="text" id="companyName" name="companyName" defaultValue={user ? user.companyName : ''} onChange={(e) => handleInputChange(e.target.value, 'companyName')} />
                     </form>
                 </div>
+                {error && <ErrorMessage message='Something went wrong. Please try again.' />}
                 <div className='button-wrapper'>
                   <Button primary onClick={handleSubmit}>Save</Button>
                 </div>

@@ -8,6 +8,7 @@ import { UserContext } from '../../context/UserContext';
 import API from '../../utils/API';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ErrorMessage from '../../components/ErrorMessage';
 
 const security = () => {
   const { user } = useContext(UserContext);
@@ -18,6 +19,7 @@ const security = () => {
   });
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [error, setError] = useState(false);
 
 
   const handleInputChange = (input, fieldName) => {
@@ -36,9 +38,7 @@ const security = () => {
             toast.success("SUCCESS!");
         }
       })
-      .catch(err => {
-        toast.error('Unable to reset password')
-      })
+      .catch(err => setError(true))
 
     }
 
@@ -80,6 +80,7 @@ useEffect(() => {
 
                       </form>
                   </div>
+                  {error && <ErrorMessage message='Please make sure your current password is correct.' />}
                   <div className='button-wrapper'>
                     <Button primary disabled={isButtonDisabled} onClick={handleSubmit}>Save</Button>
                   </div>

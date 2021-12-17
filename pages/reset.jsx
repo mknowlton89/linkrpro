@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import LoginLogoutWrapper from '../components/LoginLogoutWrapper';
 import { StyledInput } from '../styles/StyledComponents';
+import ErrorMessage from '../components/ErrorMessage';
 
 const reset = () => {
     const [userData, setUserData] = useState({});
@@ -105,7 +106,7 @@ const reset = () => {
                         type="password"
                         placeholder="Confirm your password"
                         onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
-                    {error && <p className="error">Something went wrong, please try again.</p>}
+                    {error && <ErrorMessage message="Something went wrong, please try again" />}
                     <p className="password-hint">Password must be between 6 and 50 characters.</p>
                     <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Save Password</Button>
                 </div>
