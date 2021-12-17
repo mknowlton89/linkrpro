@@ -6,7 +6,6 @@ const CampaignContextSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      // unique: true,
       required: [true, 'CampaignContext is required'],
     },
     user: {

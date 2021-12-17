@@ -6,7 +6,6 @@ const CampaignTermSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
       required: [true, 'CampaignTerm is required'],
     },
     user: {

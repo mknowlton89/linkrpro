@@ -20,6 +20,7 @@ export default async (req, res) => {
             })
             res.status(201).json({Success: "Success - campaignUrl was saved."})
           } catch (error) {
+            console.log(error)
             res.status(400).json({Error: "An error has occurred. Please try again."})
           }
           break;

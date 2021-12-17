@@ -6,7 +6,6 @@ const LinkSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
       required: [true, 'Must provide link to create a link.'],
     },
     user: {

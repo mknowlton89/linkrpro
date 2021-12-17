@@ -7,7 +7,6 @@ const CampaignSourceSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      // unique: true,
       required: [true, 'Please provide an email.'],
     },
     user: {

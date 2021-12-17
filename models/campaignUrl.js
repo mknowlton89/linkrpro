@@ -6,8 +6,7 @@ const CampaignUrlSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
-      required: [true, 'Please provide an email.'],
+      required: [true, 'Please provide a campaignUrl.'],
     },
     user: {
       type: String,

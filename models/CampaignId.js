@@ -7,7 +7,6 @@ const CampaignIdSchema = new mongoose.Schema(
       type: String,
       trim: true,
       lowercase: true,
-      unique: true,
       required: [true, 'CampaignID is required'],
     },
     user: {
