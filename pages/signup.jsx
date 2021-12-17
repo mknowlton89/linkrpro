@@ -6,6 +6,7 @@ import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import ErrorMessage from '../components/ErrorMessage'
 
 const Signup = () => {
     const [newUserData, setNewUserData] = useState({});
@@ -111,7 +112,7 @@ const Signup = () => {
                         type="password"
                         placeholder="Confirm your password"
                         onChange={(e) => handleInputChange(e.target.value, 'passwordConfirmation')} />
-                    {error && <p className="error">Please ensure you entered a valid email.</p>}
+                    {error && <ErrorMessage message='Email and/or password is incorrect' />}
                     <p className="password-hint">Password must be between 6 and 50 characters.</p>
                     <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Step 2 - Choose Plan</Button>
                     <div className="login-helper">

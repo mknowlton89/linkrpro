@@ -6,10 +6,12 @@ import Button from '../components/Button'
 import API from '../utils/API'
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import ErrorMessage from '../components/ErrorMessage'
 
 const login = () => {
     const [userLoginData, setUserLoginData] = useState({});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [error, setError] = useState(false);
     const { user, setUser } = useContext(UserContext);
     const router = useRouter()
 
@@ -39,7 +41,7 @@ const login = () => {
                     router.route('/create')
                 }
             })
-            .catch(err => console.log(err, "Error Finding User"))
+            .catch(err => setError(true))
     }
 
     const handleInputChange = (input, fieldName) => {
@@ -88,6 +90,7 @@ const login = () => {
                     <h1 className="hr">Login To Your Account</h1>
                     <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
                     <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
+                    {error && <ErrorMessage message='Email and/or password is incorrect' />}
                     <Button onClick={handleSubmit} disabled={isButtonDisabled && 'disabled'} primary>Login</Button>
                     <div className="login-helper">
                         <a href="/signup">Don't have an account yet?</a>
