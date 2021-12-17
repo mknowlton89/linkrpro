@@ -72,7 +72,7 @@ const TextInput = ({ fieldPreviewText, fieldName, setLinkInputs, linkInputs, err
                     border-radius: 5px;
                     display: flex;
                     align-items: center;
-                    font-size: 22px;
+                    font-size: 16px;
                     margin: 10px;
                     z-index: 10;
                 }
