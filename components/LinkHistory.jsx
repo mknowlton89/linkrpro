@@ -61,91 +61,96 @@ const LinkHistory = (props) => {
 
     const { globalFilter, pageIndex } = state;
 
+    console.log(props.data);
+
     return (
         <>
             <PageContentWrapper>
                 <h1>Your Link History</h1>
-                <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} />
-                <div className="table-wrapper">
-                    <table {...getTableProps()}
-                        // style={{
-                        //     border: 'solid 1px black',
-                        //     fontSize: '15px'
-                        // }}
-                        >
-                    <thead>
-                        {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                            <th
-                                {...column.getHeaderProps(column.getSortByToggleProps())}
-                                // style={{
-                                // borderBottom: 'solid 1px black',
-                                // color: 'black',
-                                // fontWeight: 'bold',
-                                // height: '25px',
-                                // fontSize: '17px'
-                                // }}
-                            >
-                                {column.render('Header')}
-                                <span>
-                                    {column.isSorted ? (column.isSortedDesc ? '\u25B2' : '\u25BC') : ''}
-                                </span>
-                            </th>
-                            ))}
-                        </tr>
-                        ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                        {page.map(row => {
-                        prepareRow(row)
-                        return (
-                            <tr {...row.getRowProps()}>
-                            {row.cells.map(cell => {
-                                return (
-                                <td
-                                    {...cell.getCellProps()}
-                                    // style={{
-                                    // padding: '10px',
-                                    // border: 'solid 1px gray',
-                                    // }}
+                {
+                    (!props.data || props.data.length === 0) ?
+                    <div className='empty-state'>
+                        <h2>You haven't created any links yet</h2>
+                        <a href='/create'>
+                            <Button primary>
+                                Create a Link
+                            </Button>
+                        </a>
+                    </div>
+                    :
+                    <>
+                        <GlobalTableFilter filter={globalFilter} setFilter={setGlobalFilter} />
+                        <div className="table-wrapper">
+                            <table {...getTableProps()}
                                 >
-                                    {cell.render('Cell')}
-                                </td>
+                            <thead>
+                                {headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {headerGroup.headers.map(column => (
+                                    <th
+                                        {...column.getHeaderProps(column.getSortByToggleProps())}
+                                    >
+                                        {column.render('Header')}
+                                        <span>
+                                            {column.isSorted ? (column.isSortedDesc ? '\u25B2' : '\u25BC') : ''}
+                                        </span>
+                                    </th>
+                                    ))}
+                                </tr>
+                                ))}
+                            </thead>
+                            <tbody {...getTableBodyProps()}>
+                                {page.map(row => {
+                                prepareRow(row)
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                    {row.cells.map(cell => {
+                                        return (
+                                        <td
+                                            {...cell.getCellProps()}
+                                            // style={{
+                                            // padding: '10px',
+                                            // border: 'solid 1px gray',
+                                            // }}
+                                        >
+                                            {cell.render('Cell')}
+                                        </td>
+                                        )
+                                    })}
+                                    </tr>
                                 )
-                            })}
-                            </tr>
-                        )
-                        })}
-                    </tbody>
-                    </table>
-                </div>
-                <div className="table-nav-wrapper">
-                    <div className="table-nav-header-wrapper">
-                    <div className="table-nav-button-header">
-                        <p>Page{' '}{pageIndex + 1} of {pageOptions.length}</p>
-                    </div>
-                    <span>
-                        Go to Page: {' '}
-                        <input
-                            type="text"
-                            onChange={e => {
-                            const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
-                            gotoPage(pageNumber)
-                        }} />
-                        </span>
-                    </div>
-                    <div className="table-nav-button-wrapper">
-                        <div className="table-nav-buttons">
-                            <div className="first-button">
-                                <Button primary disabled={!canPreviousPage} onClick={() => previousPage()}>Previous</Button>
+                                })}
+                            </tbody>
+                            </table>
+                        </div>
+                        <div className="table-nav-wrapper">
+                            <div className="table-nav-header-wrapper">
+                            <div className="table-nav-button-header">
+                                <p>Page{' '}{pageIndex + 1} of {pageOptions.length}</p>
                             </div>
-                            <div>
-                                <Button primary disabled={!canNextPage} onClick={() => nextPage()}>Next</Button>
+                            <span>
+                                Go to Page: {' '}
+                                <input
+                                    type="text"
+                                    onChange={e => {
+                                    const pageNumber = e.target.value ? Number(e.target.value) - 1 : 0
+                                    gotoPage(pageNumber)
+                                }} />
+                                </span>
+                            </div>
+                            <div className="table-nav-button-wrapper">
+                                <div className="table-nav-buttons">
+                                    <div className="first-button">
+                                        <Button primary disabled={!canPreviousPage} onClick={() => previousPage()}>Previous</Button>
+                                    </div>
+                                    <div>
+                                        <Button primary disabled={!canNextPage} onClick={() => nextPage()}>Next</Button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    </div>
+                    </>
+                }
             </PageContentWrapper>
 
             <style jsx>{`
@@ -258,6 +263,15 @@ const LinkHistory = (props) => {
 
                 .first-button {
                     margin-right: 10px;
+                }
+
+                .empty-state {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 50vh;
                 }
 
             `}</style>
