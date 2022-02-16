@@ -12,7 +12,7 @@ const CampaignNameSchema = new mongoose.Schema(
     user: {
       type: String,
       trim: true,
-      required: [true, 'User is required']
+      required: [true, 'Campaign name is required']
     }
   });
 
