@@ -28,6 +28,7 @@ const Signup = () => {
             signUpDate: signUpDate
         })
             .then((res) => {
+                console.log(res);
                 setUser({
                     _id: res.data.data._id,
                     email: res.data.data.email,
@@ -37,10 +38,10 @@ const Signup = () => {
 
                 window.localStorage.setItem('authToken', res.data.token);
                 if (res.status === 200) {
-                    router.route('/welcome')
+                    router.push('/welcome')
                 }
             })
-            .catch(err => setError(true))
+            .catch(err => console.log(err))
     }
 
     const handleInputChange = (input, fieldName) => {
