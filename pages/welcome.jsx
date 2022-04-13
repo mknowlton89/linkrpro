@@ -74,7 +74,7 @@ const welcome = () => {
                         className="product-card">
                         <h1>Sample Product #1</h1>
                         <h3>$10.00/Month</h3>
-                        <Button onClick={(e) => handleClick("Test Product", 'price_1Jr6QiA2NnxEX769RVJTEj4E')} primary>Add Billing Info</Button>
+                        <Button onClick={(e) => handleClick("Test Product", 'price_1Jr6QiA2NnxEX769RVJTEj4E')} primary>Select Plan</Button>
                     </div>
                 </div>
             </LoginLogoutWrapper>

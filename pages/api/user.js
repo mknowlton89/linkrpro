@@ -16,13 +16,12 @@ export default async function handler(req, res) {
 
                 console.log(stripeCustomer);
 
-                // if (stripeCustomer.id) {
                     const newUser = await User.create({stripeCustomerId: stripeCustomer.id, email: req.body.email, password: req.body.password, signupDate: req.body.signupDate})
-                // }
 
                 let authToken = jwt.sign({
                     userId: newUser._id,
                     email: newUser.email,
+                    stripeCustomerId: stripeCustomer.id,
                 }, process.env.JWT_SECRET_KEY, {
                     expiresIn: "24h"
                 });
