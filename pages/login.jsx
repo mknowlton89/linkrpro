@@ -37,7 +37,6 @@ const login = () => {
 
                 window.localStorage.setItem('authToken', res.data.token);
                 if (res.status === 200) {
-                    // router.push('/create')
                     router.route('/create')
                 }
             })
@@ -54,15 +53,15 @@ const login = () => {
         }
     }, [userLoginData])
 
-    useEffect(() => {
+    useEffect(async () => {
         if (!user) {
 
             if (typeof window !== 'undefined') {
-                authToken = localStorage.getItem('authToken');
+                authToken = await localStorage.getItem('authToken');
             };
 
             if (!authToken) {
-                router.push('/login')
+                return;
             };
 
             API.authorizeUser(authToken)
@@ -74,19 +73,24 @@ const login = () => {
                     })
                 })
                 .catch((err) => {
-                    router.push('/login')
+                    return;
                 })
         }
 
         if (user) {
             router.push('/create')
         }
-    }, [user])
+    }, [])
 
     return (
         <>
             <LoginLogoutWrapper>
                 <div className="form-wrapper">
+                    <div className='demo-credentials'>
+                        <h2>Demo User Credentials</h2>
+                        <p>Username: demo@user.com</p>
+                        <p>Password: testing123</p>
+                    </div>
                     <h1 className="hr">Login To Your Account</h1>
                     <StyledInput type="text" placeholder="Enter your Email" onChange={(e) => handleInputChange(e.target.value.toLowerCase(), 'email')} />
                     <StyledInput type="password" placeholder="Enter your password" onChange={(e) => handleInputChange(e.target.value, 'password')} />
@@ -135,6 +139,14 @@ const login = () => {
             a:visited {
                 text-decoration: none;
                 color: black;
+            }
+
+            .demo-credentials {
+                background: rgb(208,214,255);
+                background: linear-gradient(143deg, rgba(208,214,255,0.6068802521008403) 0%, rgba(144,175,176,0.23433123249299714) 100%);
+                padding: 10px;
+                font-size: 14px;
+                border-radius: 5px;
             }
 
             @media only screen and (min-width: 1000px) {

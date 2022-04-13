@@ -7,7 +7,7 @@ import SideNav from '../components/SideNav';
 
 const DashboardWrapper = ({children}) => {
     const { user, setUser } = useContext(UserContext);
-    const router = useRouter()
+    const router = useRouter();
 
     let authToken;
 
