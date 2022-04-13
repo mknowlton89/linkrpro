@@ -1,4 +1,4 @@
-### Purpose
+## Purpose
 
 This is a project I am currently working on, with the end goal of having a repo that contains all of the infrastructure of a SaaS app implemented in a way where it can be cloned, and the "guts" of the app can easily be ripped out. (E.G: The "guts" of this app allows marketers to build uniform tracking links. But, it could be cloned and the dashboard could do something completely different, and the DB could easily be switched over without having to start from scratch.
 
