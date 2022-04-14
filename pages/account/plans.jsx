@@ -19,7 +19,7 @@ const plans = () => {
                 <div className="content-wrapper">
                   <div>
                     <div className="title-wrapper">
-                      <h2>Current Plan</h2>
+                      <h2>Current Plan (Disabled for Demo)</h2>
                     </div>
                     <div className='current-plan-card'>
                       <div className='current-plan-details'>
@@ -37,7 +37,6 @@ const plans = () => {
                         <Button>Billing History</Button>
                         <Button>Cancel Plan</Button>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -70,6 +69,7 @@ const plans = () => {
               padding-left: 10%;
               padding-right: 10%;
               margin-top: 30px;
+              filter: blur(2px);
             }
 
             .current-plan-buttons {

@@ -76,7 +76,7 @@ const SideNav = () => {
                             />
                             <a href="/account/profile">Account</a>
                         </div>
-                        <div className="link-group">
+                        {/* <div className="link-group">
                             <Image
                                 src="/icons/settings.png"
                                 alt="Picture of the author"
@@ -85,7 +85,7 @@ const SideNav = () => {
                             />
                             <a href={sessionUrl}>Settings</a>
                             {/* <button onClick={handleBillingClick}>Billing</button> */}
-                        </div>
+                        {/* </div> */}
                     </div>
                 </div>
                 <div className="bottom-content">

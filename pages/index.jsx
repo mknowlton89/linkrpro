@@ -38,7 +38,7 @@ const login = () => {
                 window.localStorage.setItem('authToken', res.data.token);
                 if (res.status === 200) {
                     // router.push('/create')
-                    router.route('/create')
+                    router.push('/create')
                 }
             })
             .catch(err => setError(true))
